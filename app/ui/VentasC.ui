@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1358</width>
-    <height>1082</height>
+    <width>1390</width>
+    <height>1072</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -272,7 +272,7 @@ background-color: #f2f2f2;
                <item row="2" column="5">
                 <widget class="QLabel" name="label">
                  <property name="text">
-                  <string>Precio por Mayor</string>
+                  <string>Precio Unitario</string>
                  </property>
                 </widget>
                </item>
@@ -394,7 +394,7 @@ background-color: #f2f2f2;
                 </widget>
                </item>
                <item row="3" column="5">
-                <widget class="QLineEdit" name="InputPrecioMayor">
+                <widget class="QLineEdit" name="InputPrecioUnitario">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -415,6 +415,64 @@ background-color: #f2f2f2;
                  </property>
                  <property name="styleSheet">
                   <string notr="true">background-color: rgb(255, 255, 255);</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3" alignment="Qt::AlignRight|Qt::AlignVCenter">
+                <widget class="QPushButton" name="BtnFacturaA">
+                 <property name="cursor">
+                  <cursorShape>PointingHandCursor</cursorShape>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">
+QPushButton {
+    background-color: black; /* Fondo blanco */
+    border: none; /* Sin borde ni decoración inicial */
+    color:  white; /* Color del texto */
+    border-radius: 15px; /* Bordes circulares */
+    padding: 5px 10px; /* Espaciado interno para mejor apariencia */
+	height: 40px; /* Altura del botón */
+    text-align: center; /* Alinea el texto del botón a la izquierda */
+    font-size: 18px; /* Tamaño de fuente */
+	margin-top:20px;
+}
+
+QPushButton:hover {
+    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */
+    cursor: pointer; /* Cursor de mano al pasar sobre el botón */
+}</string>
+                 </property>
+                 <property name="text">
+                  <string>Factura A</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5" alignment="Qt::AlignLeft|Qt::AlignVCenter">
+                <widget class="QPushButton" name="BtnFacturaB">
+                 <property name="cursor">
+                  <cursorShape>PointingHandCursor</cursorShape>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">
+QPushButton {
+    background-color: black; /* Fondo blanco */
+    border: none; /* Sin borde ni decoración inicial */
+    color:  white; /* Color del texto */
+    border-radius: 15px; /* Bordes circulares */
+    padding: 5px 10px; /* Espaciado interno para mejor apariencia */
+	height: 40px; /* Altura del botón */
+    text-align: center; /* Alinea el texto del botón a la izquierda */
+    font-size: 18px; /* Tamaño de fuente */
+	margin-top:20px;
+}
+
+QPushButton:hover {
+    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */
+    cursor: pointer; /* Cursor de mano al pasar sobre el botón */
+}</string>
+                 </property>
+                 <property name="text">
+                  <string>Factura B</string>
                  </property>
                 </widget>
                </item>
@@ -458,87 +516,6 @@ QPushButton:hover {
                  </property>
                 </widget>
                </item>
-               <item row="0" column="2">
-                <widget class="QPushButton" name="BtnFacturaA">
-                 <property name="styleSheet">
-                  <string notr="true">
-QPushButton {
-    background-color: black; /* Fondo blanco */
-    border: none; /* Sin borde ni decoración inicial */
-    color:  white; /* Color del texto */
-    border-radius: 15px; /* Bordes circulares */
-    padding: 5px 10px; /* Espaciado interno para mejor apariencia */
-	height: 40px; /* Altura del botón */
-    text-align: center; /* Alinea el texto del botón a la izquierda */
-    font-size: 18px; /* Tamaño de fuente */
-	margin-top:20px;
-}
-
-QPushButton:hover {
-    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */
-    cursor: pointer; /* Cursor de mano al pasar sobre el botón */
-}</string>
-                 </property>
-                 <property name="text">
-                  <string>Factura A</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3">
-                <widget class="QPushButton" name="BtnFacturaB">
-                 <property name="styleSheet">
-                  <string notr="true">
-QPushButton {
-    background-color: black; /* Fondo blanco */
-    border: none; /* Sin borde ni decoración inicial */
-    color:  white; /* Color del texto */
-    border-radius: 15px; /* Bordes circulares */
-    padding: 5px 10px; /* Espaciado interno para mejor apariencia */
-	height: 40px; /* Altura del botón */
-    text-align: center; /* Alinea el texto del botón a la izquierda */
-    font-size: 18px; /* Tamaño de fuente */
-	margin-top:20px;
-}
-
-QPushButton:hover {
-    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */
-    cursor: pointer; /* Cursor de mano al pasar sobre el botón */
-}</string>
-                 </property>
-                 <property name="text">
-                  <string>Factura B</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="5">
-                <widget class="QPushButton" name="BtnFacturaC">
-                 <property name="cursor">
-                  <cursorShape>PointingHandCursor</cursorShape>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">
-QPushButton {
-    background-color: black; /* Fondo blanco */
-    border: none; /* Sin borde ni decoración inicial */
-    color:  white; /* Color del texto */
-    border-radius: 15px; /* Bordes circulares */
-    padding: 5px 10px; /* Espaciado interno para mejor apariencia */
-	height: 40px; /* Altura del botón */
-    text-align: center; /* Alinea el texto del botón a la izquierda */
-    font-size: 18px; /* Tamaño de fuente */
-	margin-top:20px;
-}
-
-QPushButton:hover {
-    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */
-    cursor: pointer; /* Cursor de mano al pasar sobre el botón */
-}</string>
-                 </property>
-                 <property name="text">
-                  <string>PushButton</string>
-                 </property>
-                </widget>
-               </item>
               </layout>
              </item>
             </layout>
@@ -551,7 +528,7 @@ QPushButton:hover {
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
              <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-              <widget class="QTableWidget" name="TablaVentaMayor">
+              <widget class="QTableWidget" name="tableWidget">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -803,7 +780,7 @@ QScrollBar::handle:horizontal:hover {
                </column>
                <column>
                 <property name="text">
-                 <string>PAM</string>
+                 <string>Precio</string>
                 </property>
                 <property name="textAlignment">
                  <set>AlignCenter</set>
@@ -833,7 +810,32 @@ QScrollBar::handle:horizontal:hover {
                <item row="1" column="1">
                 <widget class="QLabel" name="label_10">
                  <property name="text">
-                  <string>Nombre y Apellido: </string>
+                  <string>Nombre y apellido:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="5">
+                <widget class="QLineEdit" name="InputDescuento">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>250</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>250</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(255, 255, 255);</string>
                  </property>
                 </widget>
                </item>
@@ -856,9 +858,6 @@ QScrollBar::handle:horizontal:hover {
                    <width>250</width>
                    <height>50</height>
                   </size>
-                 </property>
-                 <property name="cursor">
-                  <cursorShape>IBeamCursor</cursorShape>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">background-color: rgb(255, 255, 255);</string>
@@ -889,8 +888,7 @@ QScrollBar::handle:horizontal:hover {
                   <cursorShape>IBeamCursor</cursorShape>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color: rgb(255, 255, 255);
-</string>
+                  <string notr="true">background-color: rgb(255, 255, 255);</string>
                  </property>
                  <property name="text">
                   <string>$</string>
@@ -912,7 +910,7 @@ QScrollBar::handle:horizontal:hover {
                 </widget>
                </item>
                <item row="2" column="0">
-                <widget class="QLineEdit" name="InputCedula">
+                <widget class="QLineEdit" name="InputCedula&#10;">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -933,6 +931,35 @@ QScrollBar::handle:horizontal:hover {
                  </property>
                  <property name="styleSheet">
                   <string notr="true">background-color: rgb(255, 255, 255);</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="5">
+                <widget class="QPushButton" name="BtnGenerarVenta">
+                 <property name="cursor">
+                  <cursorShape>PointingHandCursor</cursorShape>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">
+QPushButton {
+    background-color: black; /* Fondo blanco */
+    border: none; /* Sin borde ni decoración inicial */
+    color:  white; /* Color del texto */
+    border-radius: 15px; /* Bordes circulares */
+    padding: 5px 10px; /* Espaciado interno para mejor apariencia */
+	height: 40px; /* Altura del botón */
+    text-align: center; /* Alinea el texto del botón a la izquierda */
+    font-size: 18px; /* Tamaño de fuente */
+	margin-top:20px;
+}
+
+QPushButton:hover {
+    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */
+    cursor: pointer; /* Cursor de mano al pasar sobre el botón */
+}</string>
+                 </property>
+                 <property name="text">
+                  <string>Generar Venta</string>
                  </property>
                 </widget>
                </item>
@@ -958,6 +985,13 @@ QScrollBar::handle:horizontal:hover {
                  </property>
                  <property name="styleSheet">
                   <string notr="true">background-color: rgb(255, 255, 255);</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="5">
+                <widget class="QLabel" name="label_2">
+                 <property name="text">
+                  <string>Descuento Global:</string>
                  </property>
                 </widget>
                </item>
@@ -1129,69 +1163,13 @@ QComboBox QAbstractItemView {
     selection-color: white; /* Texto blanco al seleccionar */
     border-radius: 10px; /* Bordes redondeados */
 }
-
 </string>
                  </property>
-                </widget>
-               </item>
-               <item row="2" column="4">
-                <widget class="QLineEdit" name="InputDescuentoB">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
+                 <property name="insertPolicy">
+                  <enum>QComboBox::NoInsert</enum>
                  </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>250</width>
-                   <height>50</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>250</width>
-                   <height>50</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgb(255, 255, 255);</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <widget class="QLabel" name="label_2">
-                 <property name="text">
-                  <string>Descuento Global:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="4">
-                <widget class="QPushButton" name="BtnGenerarVenta">
-                 <property name="cursor">
-                  <cursorShape>PointingHandCursor</cursorShape>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">
-QPushButton {
-    background-color: black; /* Fondo blanco */
-    border: none; /* Sin borde ni decoración inicial */
-    color:  white; /* Color del texto */
-    border-radius: 15px; /* Bordes circulares */
-    padding: 5px 10px; /* Espaciado interno para mejor apariencia */
-	height: 40px; /* Altura del botón */
-    text-align: center; /* Alinea el texto del botón a la izquierda */
-    font-size: 18px; /* Tamaño de fuente */
-	margin-top:20px;
-}
-
-QPushButton:hover {
-    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */
-    cursor: pointer; /* Cursor de mano al pasar sobre el botón */
-}</string>
-                 </property>
-                 <property name="text">
-                  <string>Generar Venta</string>
+                 <property name="frame">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
