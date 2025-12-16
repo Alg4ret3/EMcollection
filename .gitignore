@@ -5,3 +5,4 @@ systock.db
 __pycache__/
 .pyc
 
+venv-EMCollection/
