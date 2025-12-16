@@ -164,8 +164,8 @@ class MainWindow(QMainWindow):
         self.usuario_actual_id = usuario_autenticado.ID_Usuario
         self.MainApp.ventasA.usuario_actual_id = usuario_autenticado.ID_Usuario
         self.MainApp.ventasB.usuario_actual_id = usuario_autenticado.ID_Usuario
-        self.MainApp.ventasCredito.usuario_actual_id = usuario_autenticado.ID_Usuario
-        self.MainApp.pagoCredito.usuario_actual_id = usuario_autenticado.ID_Usuario
+        #self.MainApp.ventasCredito.usuario_actual_id = usuario_autenticado.ID_Usuario
+        #self.MainApp.pagoCredito.usuario_actual_id = usuario_autenticado.ID_Usuario
         self.MainApp.caja.usuario_actual_id = usuario_autenticado.ID_Usuario
         token = self.generar_token(usuario_autenticado.ID_Usuario, rol)
 
@@ -206,22 +206,22 @@ class MainWindow(QMainWindow):
         if rol == "ADMINISTRADOR":
             navbar.BtnVentas.setEnabled(True)
             navbar.BtnCaja.setEnabled(True)
-            navbar.BtnCredito.setEnabled(True)
+            #navbar.BtnCredito.setEnabled(True)
             navbar.BtnEgreso.setEnabled(True)
             navbar.BtnRespaldo.setEnabled(True)
             navbar.BtnProductos.setEnabled(True)
-            navbar.BtnCrediFactura.setEnabled(True)
+            #navbar.BtnCrediFactura.setEnabled(True)
             navbar.BtnFacturas.setEnabled(True)
             navbar.BtnReportes.setEnabled(True)
             navbar.BtnControlUsuario.setEnabled(True)
         elif rol == "ASESOR":
             navbar.BtnVentas.setEnabled(True)
             navbar.BtnCaja.setEnabled(True)
-            navbar.BtnCredito.setEnabled(True)
+           #navbar.BtnCredito.setEnabled(True)
             navbar.BtnEgreso.setEnabled(True)
             navbar.BtnRespaldo.setEnabled(False)
             navbar.BtnProductos.setEnabled(False)
-            navbar.BtnCrediFactura.setEnabled(True)
+            #navbar.BtnCrediFactura.setEnabled(True)
             navbar.BtnFacturas.setEnabled(True)
             navbar.BtnReportes.setEnabled(False)
             navbar.BtnControlUsuario.setEnabled(False)

@@ -52,23 +52,23 @@ class MainApp(QWidget):
         self.caja = Caja_View()
         self.ventasA = VentasA_View()
         self.ventasB = VentasB_View()
-        self.ventasCredito = VentasCredito_View()
+        #self.ventasCredito = VentasCredito_View()
         self.facturas = Facturas_View()
         self.egreso = Egreso_View()
         self.productos = Productos_View()
         self.respaldo_view = Respaldo_View()
         self.control_usuario_view = ControlUsuario_View()
         self.reportes = Reportes_View()
-        self.crediFactura = CrediFactura_View()
+        #self.crediFactura = CrediFactura_View()
         self.pagoCredito = PagoCredito_View()
         self.Clientes = Cliente_View()
         
         self.stacked_widget.addWidget(self.caja)  # Índice 4
         self.stacked_widget.addWidget(self.ventasA)  # Índice 0
         self.stacked_widget.addWidget(self.ventasB)  # Índice 1
-        self.stacked_widget.addWidget(self.ventasCredito)  # Índice 1
+        #self.stacked_widget.addWidget(self.ventasCredito)  # Índice 1
         self.stacked_widget.addWidget(self.facturas)  # Índice 2
-        self.stacked_widget.addWidget(self.crediFactura)  # Índice 3
+        # self.stacked_widget.addWidget(self.crediFactura)  # Índice 3
         self.stacked_widget.addWidget(self.egreso)  # Índice 5
         self.stacked_widget.addWidget(self.productos)  # Índice 6
         self.stacked_widget.addWidget(self.respaldo_view)  # Índice 7
@@ -84,9 +84,9 @@ class MainApp(QWidget):
         self.navbar.BtnCaja.clicked.connect(
             lambda: self.stacked_widget.setCurrentWidget(self.caja)
         )
-        self.navbar.BtnCredito.clicked.connect(
+        """self.navbar.BtnCredito.clicked.connect(
             lambda: self.stacked_widget.setCurrentWidget(self.ventasCredito)
-        )
+        )"""
         self.navbar.BtnEgreso.clicked.connect(
             lambda: self.stacked_widget.setCurrentWidget(self.egreso)
         )
@@ -96,9 +96,9 @@ class MainApp(QWidget):
         self.navbar.BtnProductos.clicked.connect(
             lambda: self.stacked_widget.setCurrentWidget(self.productos)
         )
-        self.navbar.BtnCrediFactura.clicked.connect(
+        """self.navbar.BtnCrediFactura.clicked.connect(
             lambda: self.stacked_widget.setCurrentWidget(self.crediFactura)
-        )
+        )"""
         self.navbar.BtnFacturas.clicked.connect(
             lambda: self.stacked_widget.setCurrentWidget(self.facturas)
         )
@@ -121,9 +121,9 @@ class MainApp(QWidget):
         
         self.facturas.enviar_facturas_A.connect(self.cambiar_a_ventasA)
         self.facturas.enviar_facturas_B.connect(self.cambiar_a_ventasB)
-        self.facturas.enviar_facturas_Credito.connect(self.cambiar_a_ventasCredito)
-        self.crediFactura.enviar_facturas_Credito.connect(self.cambiar_a_ventasCredito)
-        self.crediFactura.enviar_ventaCredito.connect(self.cambiar_a_pagoCredito)
+        #self.facturas.enviar_facturas_Credito.connect(self.cambiar_a_ventasCredito)
+        #self.crediFactura.enviar_facturas_Credito.connect(self.cambiar_a_ventasCredito)
+        #self.crediFactura.enviar_ventaCredito.connect(self.cambiar_a_pagoCredito)
 
     def cambiar_a_ventasA(self, factura_completa):
         try:
@@ -141,7 +141,7 @@ class MainApp(QWidget):
         except Exception as e:
             print(f"Error al cargar datos VentasB: {e}")
 
-    def cambiar_a_ventasCredito(self, factura_completa, id_venta_credito=None):
+    """def cambiar_a_ventasCredito(self, factura_completa, id_venta_credito=None):
         try:
             self.stacked_widget.setCurrentWidget(self.ventasCredito)
             self.ventasCredito.cargar_información(factura_completa, id_venta_credito)
@@ -155,4 +155,4 @@ class MainApp(QWidget):
             self.pagoCredito.cargar_información(id_ventaCredito)
 
         except Exception as e:
-            print(f"Error al cargar datos PagoCredito: {e}")
+            print(f"Error al cargar datos PagoCredito: {e}")"""

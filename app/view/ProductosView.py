@@ -17,7 +17,7 @@ class Productos_View(QWidget, Ui_Productos):
     def __init__(self, parent=None):
         super(Productos_View, self).__init__(parent)
         self.setupUi(self)
-        
+  
         # palceholder
         self.InputCodigo.setPlaceholderText("Ej: 1000")
         self.InputNombre.setPlaceholderText("Ej: Producto 1")
@@ -30,7 +30,6 @@ class Productos_View(QWidget, Ui_Productos):
         self.InputPrecioUnitario.setPlaceholderText("Ej: 50%")
         self.InputPrecioMayor.setPlaceholderText("Ej: 35%")
         self.InputCodigo.textChanged.connect(self.verififcarInput)
-        self.InputPrecioEspecial.setPlaceholderText("Ej: 40%")
         
         # Cambiar el orden de navegación con Tab
         self.setTabOrder(self.InputCodigo, self.InputNombre)
@@ -42,7 +41,6 @@ class Productos_View(QWidget, Ui_Productos):
         self.setTabOrder(self.InputCantidadMax, self.InputPrecioCompra)
         self.setTabOrder(self.InputPrecioCompra, self.InputPrecioUnitario)
         self.setTabOrder(self.InputPrecioUnitario, self.InputPrecioMayor)
-        self.setTabOrder(self.InputPrecioMayor, self.InputPrecioEspecial)
 
         self.InputBuscador.setPlaceholderText(
             "Buscar por código, Nombre, Marca o Categoria"
@@ -58,7 +56,6 @@ class Productos_View(QWidget, Ui_Productos):
         configurar_validador_numerico(self.InputCantidadMin)
         configurar_validador_numerico(self.InputPrecioMayor)
         configurar_validador_numerico(self.InputPrecioCompra)
-        configurar_validador_numerico(self.InputPrecioEspecial)
 
         configurar_validador_texto_y_numeros(self.InputNombre)
         configurar_validador_texto(self.InputMarca)
@@ -78,6 +75,8 @@ class Productos_View(QWidget, Ui_Productos):
         self.TablaProductos.setColumnWidth(4, 80)
         self.TablaProductos.setColumnWidth(5, 80)
         self.TablaProductos.setColumnWidth(6, 80)
+
+        
 
         # Conectar el evento de presionar Enter en los inputs
         self.InputNombre.returnPressed.connect(self.editar_producto)
@@ -135,8 +134,6 @@ class Productos_View(QWidget, Ui_Productos):
         elif self.focusWidget() == self.InputPrecioUnitario:
             self.InputPrecioMayor.setFocus()
         elif self.focusWidget() == self.InputPrecioMayor:
-            self.InputPrecioEspecial.setFocus()  
-        elif self.focusWidget() == self.InputPrecioEspecial:
             self.InputCodigo.setFocus()  # Volver al inicio
 
     def navegar_widgets_atras(self):
@@ -269,6 +266,9 @@ class Productos_View(QWidget, Ui_Productos):
                     estado = "Activo"
                 else:
                     estado = "Inactivo"
+                precio_venta_reventa = str(row.Precio_venta_reventa)
+                ganancia_producto_reventa = str(row.Ganancia_Producto_reventa)
+
                 
                 precio_cp += row.Precio_costo * row.Stock_actual
                 
@@ -331,7 +331,16 @@ class Productos_View(QWidget, Ui_Productos):
                 estado_item.setTextAlignment(QtCore.Qt.AlignCenter)
                 self.TablaProductos.setItem(row_idx, 12, estado_item)
 
-                
+                precio_venta_reventa_item = QtWidgets.QTableWidgetItem(precio_venta_reventa)
+                precio_venta_reventa_item.setTextAlignment(QtCore.Qt.AlignRight)
+                self.TablaProductos.setItem(row_idx, 13, precio_venta_reventa_item)
+
+                ganancia_producto_reventa_item = QtWidgets.QTableWidgetItem(
+                    ganancia_producto_reventa
+                )
+                ganancia_producto_reventa_item.setTextAlignment(QtCore.Qt.AlignRight)
+                self.TablaProductos.setItem(row_idx, 14, ganancia_producto_reventa_item)
+
 
                 if row.Stock_actual <= row.Stock_min:
                     for col in range(self.TablaProductos.columnCount()):
@@ -394,6 +403,8 @@ class Productos_View(QWidget, Ui_Productos):
         self.InputPrecioCompra.setText(datos_fila[7])
         self.InputPrecioUnitario.setText(datos_fila[8])
         self.InputPrecioMayor.setText(datos_fila[9])
+        self.InputPrecioReventa.setText(datos_fila[13])
+
 
     def mostrar_productos(self):
         """
@@ -411,7 +422,7 @@ class Productos_View(QWidget, Ui_Productos):
         Limpia la tabla de productos.
         """
         self.TablaProductos.setRowCount(0)
-        self.TablaProductos.setColumnCount(12)
+        self.TablaProductos.setColumnCount(15)
 
     def ingresar_producto(self):
         """
@@ -427,6 +438,14 @@ class Productos_View(QWidget, Ui_Productos):
         categoria = self.InputCategoria.text()
         precio_unitario = self.InputPrecioUnitario.text()
         precio_mayor = self.InputPrecioMayor.text()
+        precio_reventa = self.InputPrecioReventa.text()
+
+        if not precio_reventa:
+            precio_reventa = self.InputPrecioReventa.placeholderText()
+
+        precio_reventa = float(precio_reventa)
+
+
 
         if not precio_unitario:
             precio_unitario = self.InputPrecioUnitario.placeholderText()
@@ -485,9 +504,11 @@ class Productos_View(QWidget, Ui_Productos):
                 cantidad_max,
                 precio_unitario,
                 precio_mayor,
+                precio_reventa,
                 id_marca,
                 id_categoria,
             )
+
             enviar_notificacion("Éxito", "Producto registrado exitosamente")
             self.limpiar_formulario()
             self.limpiar_tabla_productos()
@@ -531,6 +552,9 @@ class Productos_View(QWidget, Ui_Productos):
         categoria = self.InputCategoria.text()
         precio_mayor = self.InputPrecioMayor.text()
         precio_unitario = self.InputPrecioUnitario.text()
+        precio_reventa = self.InputPrecioReventa.text()
+        precio_reventa = float(precio_reventa) if precio_reventa else None
+
 
         # Verificar que todos los campos tengan datos
         if (
@@ -588,6 +612,8 @@ class Productos_View(QWidget, Ui_Productos):
                         "id_categoria": id_categoria,
                         "precio_venta_mayor": precio_mayor,
                         "precio_venta_normal": precio_unitario,
+                        "precio_venta_reventa": precio_reventa,
+
                     }
                 )
 
@@ -636,6 +662,7 @@ class Productos_View(QWidget, Ui_Productos):
         self.InputCategoria.setText("")
         self.InputPrecioUnitario.setText("")
         self.InputPrecioMayor.setText("")
+
 
     def limpiar_formulario_codigo(self):
         """
