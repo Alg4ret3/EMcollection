@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'VentasB.ui'
+# Form implementation generated from reading ui file '.\VentasB.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.11
 #
@@ -299,46 +299,6 @@ class Ui_VentasB(object):
         self.InputPrecioMayor.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.InputPrecioMayor.setObjectName("InputPrecioMayor")
         self.gridLayout_2.addWidget(self.InputPrecioMayor, 3, 5, 1, 1)
-        self.BtnFacturaA = QtWidgets.QPushButton(self.widget_3)
-        self.BtnFacturaA.setStyleSheet("\n"
-"QPushButton {\n"
-"    background-color: black; /* Fondo blanco */\n"
-"    border: none; /* Sin borde ni decoración inicial */\n"
-"    color:  white; /* Color del texto */\n"
-"    border-radius: 15px; /* Bordes circulares */\n"
-"    padding: 5px 10px; /* Espaciado interno para mejor apariencia */\n"
-"    height: 40px; /* Altura del botón */\n"
-"    text-align: center; /* Alinea el texto del botón a la izquierda */\n"
-"    font-size: 18px; /* Tamaño de fuente */\n"
-"    margin-top:20px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */\n"
-"    cursor: pointer; /* Cursor de mano al pasar sobre el botón */\n"
-"}")
-        self.BtnFacturaA.setObjectName("BtnFacturaA")
-        self.gridLayout_2.addWidget(self.BtnFacturaA, 0, 3, 1, 1, QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
-        self.BtnFacturaB = QtWidgets.QPushButton(self.widget_3)
-        self.BtnFacturaB.setStyleSheet("\n"
-"QPushButton {\n"
-"    background-color: black; /* Fondo blanco */\n"
-"    border: none; /* Sin borde ni decoración inicial */\n"
-"    color:  white; /* Color del texto */\n"
-"    border-radius: 15px; /* Bordes circulares */\n"
-"    padding: 5px 10px; /* Espaciado interno para mejor apariencia */\n"
-"    height: 40px; /* Altura del botón */\n"
-"    text-align: center; /* Alinea el texto del botón a la izquierda */\n"
-"    font-size: 18px; /* Tamaño de fuente */\n"
-"    margin-top:20px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */\n"
-"    cursor: pointer; /* Cursor de mano al pasar sobre el botón */\n"
-"}")
-        self.BtnFacturaB.setObjectName("BtnFacturaB")
-        self.gridLayout_2.addWidget(self.BtnFacturaB, 0, 5, 1, 1, QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.BtnEliminar = QtWidgets.QPushButton(self.widget_3)
         self.BtnEliminar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.BtnEliminar.setStyleSheet("\n"
@@ -360,11 +320,72 @@ class Ui_VentasB(object):
 "    cursor: pointer; /* Cursor de mano al pasar sobre el botón */\n"
 "}")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("assets/iconos/eliminar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(".\\../../assets/iconos/eliminar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.BtnEliminar.setIcon(icon)
         self.BtnEliminar.setIconSize(QtCore.QSize(30, 30))
         self.BtnEliminar.setObjectName("BtnEliminar")
         self.gridLayout_2.addWidget(self.BtnEliminar, 5, 5, 1, 1)
+        self.BtnFacturaA = QtWidgets.QPushButton(self.widget_3)
+        self.BtnFacturaA.setStyleSheet("\n"
+"QPushButton {\n"
+"    background-color: black; /* Fondo blanco */\n"
+"    border: none; /* Sin borde ni decoración inicial */\n"
+"    color:  white; /* Color del texto */\n"
+"    border-radius: 15px; /* Bordes circulares */\n"
+"    padding: 5px 10px; /* Espaciado interno para mejor apariencia */\n"
+"    height: 40px; /* Altura del botón */\n"
+"    text-align: center; /* Alinea el texto del botón a la izquierda */\n"
+"    font-size: 18px; /* Tamaño de fuente */\n"
+"    margin-top:20px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */\n"
+"    cursor: pointer; /* Cursor de mano al pasar sobre el botón */\n"
+"}")
+        self.BtnFacturaA.setObjectName("BtnFacturaA")
+        self.gridLayout_2.addWidget(self.BtnFacturaA, 0, 2, 1, 1)
+        self.BtnFacturaB = QtWidgets.QPushButton(self.widget_3)
+        self.BtnFacturaB.setStyleSheet("\n"
+"QPushButton {\n"
+"    background-color: black; /* Fondo blanco */\n"
+"    border: none; /* Sin borde ni decoración inicial */\n"
+"    color:  white; /* Color del texto */\n"
+"    border-radius: 15px; /* Bordes circulares */\n"
+"    padding: 5px 10px; /* Espaciado interno para mejor apariencia */\n"
+"    height: 40px; /* Altura del botón */\n"
+"    text-align: center; /* Alinea el texto del botón a la izquierda */\n"
+"    font-size: 18px; /* Tamaño de fuente */\n"
+"    margin-top:20px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */\n"
+"    cursor: pointer; /* Cursor de mano al pasar sobre el botón */\n"
+"}")
+        self.BtnFacturaB.setObjectName("BtnFacturaB")
+        self.gridLayout_2.addWidget(self.BtnFacturaB, 0, 3, 1, 1)
+        self.BtnFacturaC = QtWidgets.QPushButton(self.widget_3)
+        self.BtnFacturaC.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.BtnFacturaC.setStyleSheet("\n"
+"QPushButton {\n"
+"    background-color: black; /* Fondo blanco */\n"
+"    border: none; /* Sin borde ni decoración inicial */\n"
+"    color:  white; /* Color del texto */\n"
+"    border-radius: 15px; /* Bordes circulares */\n"
+"    padding: 5px 10px; /* Espaciado interno para mejor apariencia */\n"
+"    height: 40px; /* Altura del botón */\n"
+"    text-align: center; /* Alinea el texto del botón a la izquierda */\n"
+"    font-size: 18px; /* Tamaño de fuente */\n"
+"    margin-top:20px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */\n"
+"    cursor: pointer; /* Cursor de mano al pasar sobre el botón */\n"
+"}")
+        self.BtnFacturaC.setObjectName("BtnFacturaC")
+        self.gridLayout_2.addWidget(self.BtnFacturaC, 0, 5, 1, 1)
         self.gridLayout.addLayout(self.gridLayout_2, 0, 0, 1, 1)
         self.verticalLayout_2.addWidget(self.widget_3)
         self.widget = QtWidgets.QWidget(self.ContenidoPage1)
@@ -759,9 +780,10 @@ class Ui_VentasB(object):
         self.label_30.setText(_translate("Form", "Productos"))
         self.label_8.setText(_translate("Form", "Valor Domicilio"))
         self.LabelVentasA.setText(_translate("Form", "Ventas"))
+        self.BtnEliminar.setText(_translate("Form", "   Eliminar"))
         self.BtnFacturaA.setText(_translate("Form", "Factura A"))
         self.BtnFacturaB.setText(_translate("Form", "Factura B"))
-        self.BtnEliminar.setText(_translate("Form", "   Eliminar"))
+        self.BtnFacturaC.setText(_translate("Form", "PushButton"))
         item = self.TablaVentaMayor.verticalHeaderItem(0)
         item.setText(_translate("Form", "Nueva fila"))
         item = self.TablaVentaMayor.verticalHeaderItem(1)

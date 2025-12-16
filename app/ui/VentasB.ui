@@ -418,58 +418,6 @@ background-color: #f2f2f2;
                  </property>
                 </widget>
                </item>
-               <item row="0" column="3" alignment="Qt::AlignRight|Qt::AlignVCenter">
-                <widget class="QPushButton" name="BtnFacturaA">
-                 <property name="styleSheet">
-                  <string notr="true">
-QPushButton {
-    background-color: black; /* Fondo blanco */
-    border: none; /* Sin borde ni decoración inicial */
-    color:  white; /* Color del texto */
-    border-radius: 15px; /* Bordes circulares */
-    padding: 5px 10px; /* Espaciado interno para mejor apariencia */
-	height: 40px; /* Altura del botón */
-    text-align: center; /* Alinea el texto del botón a la izquierda */
-    font-size: 18px; /* Tamaño de fuente */
-	margin-top:20px;
-}
-
-QPushButton:hover {
-    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */
-    cursor: pointer; /* Cursor de mano al pasar sobre el botón */
-}</string>
-                 </property>
-                 <property name="text">
-                  <string>Factura A</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="5" alignment="Qt::AlignLeft|Qt::AlignVCenter">
-                <widget class="QPushButton" name="BtnFacturaB">
-                 <property name="styleSheet">
-                  <string notr="true">
-QPushButton {
-    background-color: black; /* Fondo blanco */
-    border: none; /* Sin borde ni decoración inicial */
-    color:  white; /* Color del texto */
-    border-radius: 15px; /* Bordes circulares */
-    padding: 5px 10px; /* Espaciado interno para mejor apariencia */
-	height: 40px; /* Altura del botón */
-    text-align: center; /* Alinea el texto del botón a la izquierda */
-    font-size: 18px; /* Tamaño de fuente */
-	margin-top:20px;
-}
-
-QPushButton:hover {
-    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */
-    cursor: pointer; /* Cursor de mano al pasar sobre el botón */
-}</string>
-                 </property>
-                 <property name="text">
-                  <string>Factura B</string>
-                 </property>
-                </widget>
-               </item>
                <item row="5" column="5">
                 <widget class="QPushButton" name="BtnEliminar">
                  <property name="cursor">
@@ -507,6 +455,87 @@ QPushButton:hover {
                    <width>30</width>
                    <height>30</height>
                   </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QPushButton" name="BtnFacturaA">
+                 <property name="styleSheet">
+                  <string notr="true">
+QPushButton {
+    background-color: black; /* Fondo blanco */
+    border: none; /* Sin borde ni decoración inicial */
+    color:  white; /* Color del texto */
+    border-radius: 15px; /* Bordes circulares */
+    padding: 5px 10px; /* Espaciado interno para mejor apariencia */
+	height: 40px; /* Altura del botón */
+    text-align: center; /* Alinea el texto del botón a la izquierda */
+    font-size: 18px; /* Tamaño de fuente */
+	margin-top:20px;
+}
+
+QPushButton:hover {
+    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */
+    cursor: pointer; /* Cursor de mano al pasar sobre el botón */
+}</string>
+                 </property>
+                 <property name="text">
+                  <string>Factura A</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QPushButton" name="BtnFacturaB">
+                 <property name="styleSheet">
+                  <string notr="true">
+QPushButton {
+    background-color: black; /* Fondo blanco */
+    border: none; /* Sin borde ni decoración inicial */
+    color:  white; /* Color del texto */
+    border-radius: 15px; /* Bordes circulares */
+    padding: 5px 10px; /* Espaciado interno para mejor apariencia */
+	height: 40px; /* Altura del botón */
+    text-align: center; /* Alinea el texto del botón a la izquierda */
+    font-size: 18px; /* Tamaño de fuente */
+	margin-top:20px;
+}
+
+QPushButton:hover {
+    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */
+    cursor: pointer; /* Cursor de mano al pasar sobre el botón */
+}</string>
+                 </property>
+                 <property name="text">
+                  <string>Factura B</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <widget class="QPushButton" name="BtnFacturaC">
+                 <property name="cursor">
+                  <cursorShape>PointingHandCursor</cursorShape>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">
+QPushButton {
+    background-color: black; /* Fondo blanco */
+    border: none; /* Sin borde ni decoración inicial */
+    color:  white; /* Color del texto */
+    border-radius: 15px; /* Bordes circulares */
+    padding: 5px 10px; /* Espaciado interno para mejor apariencia */
+	height: 40px; /* Altura del botón */
+    text-align: center; /* Alinea el texto del botón a la izquierda */
+    font-size: 18px; /* Tamaño de fuente */
+	margin-top:20px;
+}
+
+QPushButton:hover {
+    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */
+    cursor: pointer; /* Cursor de mano al pasar sobre el botón */
+}</string>
+                 </property>
+                 <property name="text">
+                  <string>PushButton</string>
                  </property>
                 </widget>
                </item>
