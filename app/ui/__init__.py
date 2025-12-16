@@ -10,6 +10,7 @@ from .Login import *
 from .Productos import *
 from .VentasA import *
 from .VentasB import *
+from .VentasC import *
 from .VentasCredito import *
 from .PagoCredito import *
 from .Reportes import *
