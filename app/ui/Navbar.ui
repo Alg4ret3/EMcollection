@@ -263,7 +263,7 @@ QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>../../assets/logoladynail.jpg</pixmap>
+            <pixmap>../../assets/Logo.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>

@@ -230,7 +230,7 @@ class Ui_Navbar(object):
 "}\n"
 "")
         self.LabelImgNavbar.setText("")
-        self.LabelImgNavbar.setPixmap(QtGui.QPixmap("assets/logoladynail.jpg"))
+        self.LabelImgNavbar.setPixmap(QtGui.QPixmap("assets/Logo.png"))
         self.LabelImgNavbar.setScaledContents(True)
         self.LabelImgNavbar.setObjectName("LabelImgNavbar")
         self.verticalLayout.addWidget(self.LabelImgNavbar, 0, QtCore.Qt.AlignTop)

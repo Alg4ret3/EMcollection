@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Login(object):
     def setupUi(self, CONTENEDEDOR1):
         CONTENEDEDOR1.setObjectName("CONTENEDEDOR1")
-        CONTENEDEDOR1.resize(815, 866)
+        CONTENEDEDOR1.resize(976, 866)
         CONTENEDEDOR1.setMinimumSize(QtCore.QSize(0, 0))
         CONTENEDEDOR1.setStyleSheet("")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(CONTENEDEDOR1)
@@ -91,7 +91,7 @@ class Ui_Login(object):
         self.IMAGEN.setAutoFillBackground(False)
         self.IMAGEN.setStyleSheet("")
         self.IMAGEN.setText("")
-        self.IMAGEN.setPixmap(QtGui.QPixmap("assets/logoladynail.jpg"))
+        self.IMAGEN.setPixmap(QtGui.QPixmap("assets/Logo.png"))
         self.IMAGEN.setScaledContents(True)
         self.IMAGEN.setObjectName("IMAGEN")
         self.gridLayout_2.addWidget(self.IMAGEN, 1, 1, 1, 1)
