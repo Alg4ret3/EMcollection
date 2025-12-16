@@ -30,6 +30,7 @@ class Productos_View(QWidget, Ui_Productos):
         self.InputPrecioUnitario.setPlaceholderText("Ej: 50%")
         self.InputPrecioMayor.setPlaceholderText("Ej: 35%")
         self.InputCodigo.textChanged.connect(self.verififcarInput)
+        self.InputPrecioEspecial.setPlaceholderText("Ej: 40%")
         
         # Cambiar el orden de navegación con Tab
         self.setTabOrder(self.InputCodigo, self.InputNombre)
@@ -41,6 +42,7 @@ class Productos_View(QWidget, Ui_Productos):
         self.setTabOrder(self.InputCantidadMax, self.InputPrecioCompra)
         self.setTabOrder(self.InputPrecioCompra, self.InputPrecioUnitario)
         self.setTabOrder(self.InputPrecioUnitario, self.InputPrecioMayor)
+        self.setTabOrder(self.InputPrecioMayor, self.InputPrecioEspecial)
 
         self.InputBuscador.setPlaceholderText(
             "Buscar por código, Nombre, Marca o Categoria"
@@ -56,6 +58,7 @@ class Productos_View(QWidget, Ui_Productos):
         configurar_validador_numerico(self.InputCantidadMin)
         configurar_validador_numerico(self.InputPrecioMayor)
         configurar_validador_numerico(self.InputPrecioCompra)
+        configurar_validador_numerico(self.InputPrecioEspecial)
 
         configurar_validador_texto_y_numeros(self.InputNombre)
         configurar_validador_texto(self.InputMarca)
@@ -132,6 +135,8 @@ class Productos_View(QWidget, Ui_Productos):
         elif self.focusWidget() == self.InputPrecioUnitario:
             self.InputPrecioMayor.setFocus()
         elif self.focusWidget() == self.InputPrecioMayor:
+            self.InputPrecioEspecial.setFocus()  
+        elif self.focusWidget() == self.InputPrecioEspecial:
             self.InputCodigo.setFocus()  # Volver al inicio
 
     def navegar_widgets_atras(self):
@@ -244,7 +249,7 @@ class Productos_View(QWidget, Ui_Productos):
 
         if productos:
             self.TablaProductos.setRowCount(len(productos))
-            self.TablaProductos.setColumnCount(13)
+            self.TablaProductos.setColumnCount(15)
             precio_cp = 0   #Acumulativo de precios de compra
 
             for row_idx, row in enumerate(productos):
@@ -325,6 +330,8 @@ class Productos_View(QWidget, Ui_Productos):
                 estado_item = QtWidgets.QTableWidgetItem(estado)
                 estado_item.setTextAlignment(QtCore.Qt.AlignCenter)
                 self.TablaProductos.setItem(row_idx, 12, estado_item)
+
+                
 
                 if row.Stock_actual <= row.Stock_min:
                     for col in range(self.TablaProductos.columnCount()):
