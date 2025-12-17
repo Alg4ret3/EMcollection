@@ -276,7 +276,7 @@ class VentasB_View(QWidget, Ui_VentasB):
             self.verificar_cliente(client_id, client_name, client_address, client_phone)
 
             db = SessionLocal()
-            cantidad_total = 0
+            cantidad_total_articulos = 0
 
             # Obtener los artículos de la tabla
             produc_datos = []
@@ -285,7 +285,7 @@ class VentasB_View(QWidget, Ui_VentasB):
                 codigo = self.TablaVentaMayor.item(row, 0).text()
                 description = self.TablaVentaMayor.item(row, 1).text()
                 quantity = int(self.TablaVentaMayor.item(row, 4).text())
-                cantidad_total += quantity
+                cantidad_total_articulos += quantity
                 precio_unitario = float(self.TablaVentaMayor.item(row, 5).text())
                 value = float(self.TablaVentaMayor.item(row, 6).text())
 
@@ -300,8 +300,8 @@ class VentasB_View(QWidget, Ui_VentasB):
                 items.append((description, quantity, precio_unitario, value))
                 produc_datos.append((codigo, quantity, precio_unitario))
                 
-            if cantidad_total < 6:
-                QMessageBox.warning(self, "Error", f"El minimo para realizar la venta es 6 unidades. {cantidad_total}")
+            if cantidad_total_articulos < 6:
+                QMessageBox.warning(self, "Error", f"El minimo para realizar la venta es 6 unidades.")
                 return
 
             # Calcular totales
@@ -798,7 +798,7 @@ class VentasB_View(QWidget, Ui_VentasB):
                     self.InputNombre.setText(producto.Nombre)
                     self.InputMarca.setText(str(producto.marcas))
                     self.InputMarca.setEnabled(False)
-                    self.InputPrecioMayor.setText(str(producto.Precio_venta_mayor))
+                    self.InputPrecioMayor.setText(str(producto.Precio_venta_reventa))
                     self.InputPrecioMayor.setEnabled(False)
                     self.id_categoria = producto.categorias
                     self.InputCantidad.clear()  # Limpiar cantidad

@@ -268,9 +268,8 @@ class VentasC_View(QWidget, Ui_VentasC):
                     QMessageBox.warning(self, "Error", "El monto pagado no puede ser mayor al subtotal.")
                     return
 
-            self.verificar_cliente(client_id, client_name, client_address, client_phone)
-
             db = SessionLocal()
+            cantidad_total_articulos = 0
             
             # Obtener los artículos de la tabla
             produc_datos = []
@@ -279,6 +278,7 @@ class VentasC_View(QWidget, Ui_VentasC):
                 codigo = self.tableWidget.item(row, 0).text()
                 description = self.tableWidget.item(row, 1).text()
                 quantity = int(self.tableWidget.item(row, 4).text())
+                cantidad_total_articulos += quantity
                 precio_unitario = float(self.tableWidget.item(row, 5).text())
                 value = float(self.tableWidget.item(row, 6).text())
 
@@ -292,11 +292,20 @@ class VentasC_View(QWidget, Ui_VentasC):
 
                 items.append((description, quantity, precio_unitario, value))
                 produc_datos.append((codigo, quantity, precio_unitario))
+                
+            cliente_existente = self.cliente_existe()
 
+            if cliente_existente==False and cantidad_total_articulos >= 12:
+                self.verificar_cliente(client_id, client_name, client_address, client_phone)
+            elif cliente_existente==False and cantidad_total_articulos < 12:
+                QMessageBox.warning(self, "Error", f"El cliente no existe y no puede comprar menos de 12 unidades.")
+                return
+            
+                    
             # Calcular totales
             subtotal = sum(item[3] for item in items)
             delivery_fee = float(self.InputDomicilio.text()) if self.InputDomicilio.text() else 0.0
-            total = (subtotal + delivery_fee) - descuento
+            total = (subtotal + delivery_fee) #♠- descuento
             pago = self.InputPago.text().strip()
             
             domicilio = True if delivery_fee > 0 else False
@@ -311,7 +320,7 @@ class VentasC_View(QWidget, Ui_VentasC):
                     stock_actual = producto.Stock_actual - quantity
                     actualizar_producto(db, id_producto=int(codigo), stock_actual=stock_actual)
 
-                id_factura = self.guardar_factura(db, client_id, payment_method, produc_datos, monto_pago, descuento, self.usuario_actual_id, domicilio)
+                id_factura = self.guardar_factura(db, client_id, payment_method, produc_datos, monto_pago, 0.0, self.usuario_actual_id, domicilio)
                 self.invoice_number = f"0000{id_factura}"
                 mensaje = "Factura generada exitosamente."
             # Generar el contenido del ticket
@@ -339,7 +348,7 @@ class VentasC_View(QWidget, Ui_VentasC):
             elif len(pagos) == 2:
                 pago_formateado = f"Efectivo: ${pagos[0]:,.2f}\nTransferencia: ${pagos[1]:,.2f}"
            
-            descuento_formateado = f"${descuento:,.2f}"
+            # descuento_formateado = f"${descuento:,.2f}"
 
             # Formatear el costo de envío
             delivery_fee = float(delivery_fee)
@@ -755,7 +764,7 @@ class VentasC_View(QWidget, Ui_VentasC):
                     self.InputNombre.setText(producto.Nombre)
                     self.InputMarca.setText(str(producto.marcas))
                     self.InputMarca.setEnabled(False)
-                    self.InputPrecioUnitario.setText(str(producto.Precio_venta_normal))
+                    self.InputPrecioUnitario.setText(str(producto.Precio_venta_mayor))
                     self.InputPrecioUnitario.setEnabled(False)
                     self.id_categoria = producto.categorias
                     self.InputCantidad.clear()  # Limpiar cantidad
@@ -779,7 +788,7 @@ class VentasC_View(QWidget, Ui_VentasC):
                     self.InputNombre.setText(producto.Nombre)
                     self.InputMarca.setText(str(producto.marcas))
                     self.InputMarca.setEnabled(False)
-                    self.InputPrecioUnitario.setText(str(producto.Precio_venta_normal))
+                    self.InputPrecioUnitario.setText(str(producto.Precio_venta_mayor))
                     self.InputPrecioUnitario.setEnabled(False)
                     self.id_categoria = producto.categorias
                     self.InputCantidad.clear()  # Limpiar cantidad
@@ -1353,6 +1362,23 @@ class VentasC_View(QWidget, Ui_VentasC):
                 self.InputDireccion.setText(cliente.Direccion)
             else:
                 QMessageBox.warning(self, "Error", f"Cliente con cédula {id_cliente} no encontrado.")
+        except Exception as e:
+            print(f"Error al obtener cliente: {e}")
+        finally:
+            self.db.close()
+            
+    def cliente_existe(self):
+
+        # Obtener cliente
+        id_cliente = int(self.InputCedula.text().strip())
+        self.db = SessionLocal()
+        
+        try:
+            cliente = obtener_cliente_por_id(self.db, id_cliente)
+            if cliente:
+                return True
+            else:
+                return False
         except Exception as e:
             print(f"Error al obtener cliente: {e}")
         finally:

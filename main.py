@@ -164,6 +164,7 @@ class MainWindow(QMainWindow):
         self.usuario_actual_id = usuario_autenticado.ID_Usuario
         self.MainApp.ventasA.usuario_actual_id = usuario_autenticado.ID_Usuario
         self.MainApp.ventasB.usuario_actual_id = usuario_autenticado.ID_Usuario
+        self.MainApp.ventasC.usuario_actual_id = usuario_autenticado.ID_Usuario
         #self.MainApp.ventasCredito.usuario_actual_id = usuario_autenticado.ID_Usuario
         #self.MainApp.pagoCredito.usuario_actual_id = usuario_autenticado.ID_Usuario
         self.MainApp.caja.usuario_actual_id = usuario_autenticado.ID_Usuario
