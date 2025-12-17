@@ -118,32 +118,33 @@ def obtener_productos(db: Session):
 
 
 def obtener_producto_por_id(db: Session, id_producto: int):
-    return (
+    productos = (
         db.query(
             Productos.ID_Producto,
             Productos.Nombre,
             Productos.Precio_costo,
-
-            Productos.Precio_venta_normal,
+            
             Productos.Precio_venta_mayor,
+            Productos.Precio_venta_normal,
             Productos.Precio_venta_reventa,
-
-            Productos.Ganancia_Producto_normal,
+            
             Productos.Ganancia_Producto_mayor,
+            Productos.Ganancia_Producto_normal,
             Productos.Ganancia_Producto_reventa,
-
+            
             Productos.Stock_actual,
             Productos.Stock_min,
             Productos.Stock_max,
-
+            
             Marcas.Nombre.label("marcas"),
             Categorias.Nombre.label("categorias"),
         )
         .join(Marcas, Productos.ID_Marca == Marcas.ID_Marca)
         .join(Categorias, Productos.ID_Categoria == Categorias.ID_Categoria)
         .filter(Productos.ID_Producto == id_producto)
-        .first()
+        .all()
     )
+    return productos
 
 
 def buscar_productos(db: Session, busqueda: str):
