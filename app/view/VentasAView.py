@@ -296,7 +296,7 @@ class VentasA_View(QWidget, Ui_VentasA):
             # Calcular totales
             subtotal = sum(item[3] for item in items)
             delivery_fee = float(self.InputDomicilio.text()) if self.InputDomicilio.text() else 0.0
-            total = (subtotal + delivery_fee) - descuento
+            total = (subtotal + delivery_fee) #>- descuento
             pago = self.InputPago.text().strip()
             
             domicilio = True if delivery_fee > 0 else False
@@ -311,7 +311,7 @@ class VentasA_View(QWidget, Ui_VentasA):
                     stock_actual = producto.Stock_actual - quantity
                     actualizar_producto(db, id_producto=int(codigo), stock_actual=stock_actual)
 
-                id_factura = self.guardar_factura(db, client_id, payment_method, produc_datos, monto_pago, descuento, self.usuario_actual_id, domicilio)
+                id_factura = self.guardar_factura(db, client_id, payment_method, produc_datos, monto_pago, 0.0, self.usuario_actual_id, domicilio)
                 self.invoice_number = f"0000{id_factura}"
                 mensaje = "Factura generada exitosamente."
             # Generar el contenido del ticket
@@ -339,7 +339,7 @@ class VentasA_View(QWidget, Ui_VentasA):
             elif len(pagos) == 2:
                 pago_formateado = f"Efectivo: ${pagos[0]:,.2f}\nTransferencia: ${pagos[1]:,.2f}"
            
-            descuento_formateado = f"${descuento:,.2f}"
+            # descuento_formateado = f"${descuento:,.2f}"
 
             # Formatear el costo de envío
             delivery_fee = float(delivery_fee)

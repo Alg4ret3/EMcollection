@@ -813,7 +813,7 @@ class Ui_VentasB(object):
         item = self.TablaVentaMayor.horizontalHeaderItem(4)
         item.setText(_translate("VentasB", "Cantidad"))
         item = self.TablaVentaMayor.horizontalHeaderItem(5)
-        item.setText(_translate("VentasB", "PAM"))
+        item.setText(_translate("VentasB", "P.Reventa"))
         item = self.TablaVentaMayor.horizontalHeaderItem(6)
         item.setText(_translate("VentasB", "Total"))
         self.label_10.setText(_translate("VentasB", "Nombre y Apellido: "))

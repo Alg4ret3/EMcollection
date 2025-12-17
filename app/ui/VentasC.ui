@@ -806,7 +806,7 @@ QScrollBar::handle:horizontal:hover {
                </column>
                <column>
                 <property name="text">
-                 <string>Precio</string>
+                 <string>PAM</string>
                 </property>
                 <property name="textAlignment">
                  <set>AlignCenter</set>

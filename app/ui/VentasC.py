@@ -813,7 +813,7 @@ class Ui_VentasC(object):
         item = self.tableWidget.horizontalHeaderItem(4)
         item.setText(_translate("VentasC", "Cantidad"))
         item = self.tableWidget.horizontalHeaderItem(5)
-        item.setText(_translate("VentasC", "Precio"))
+        item.setText(_translate("VentasC", "PAM"))
         item = self.tableWidget.horizontalHeaderItem(6)
         item.setText(_translate("VentasC", "Total"))
         self.label_10.setText(_translate("VentasC", "Nombre y apellido:"))

@@ -774,7 +774,7 @@ class VentasB_View(QWidget, Ui_VentasB):
                     self.InputNombre.setText(producto.Nombre)
                     self.InputMarca.setText(str(producto.marcas))
                     self.InputMarca.setEnabled(False)
-                    self.InputPrecioMayor.setText(str(producto.Precio_venta_mayor))
+                    self.InputPrecioMayor.setText(str(producto.Precio_venta_reventa))
                     self.InputPrecioMayor.setEnabled(False)
                     self.id_categoria = producto.categorias
                     self.InputCantidad.clear()  # Limpiar cantidad
