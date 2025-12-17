@@ -19,6 +19,7 @@ from app.view import (
     Reportes_View,
     PagoCredito_View,
     Cliente_View,
+    Cambio_View,
 )
 
 
@@ -27,8 +28,8 @@ class MainApp(QWidget):
         super(MainApp, self).__init__(parent)
 
         # Configurar la ventana principal
-        self.setWindowTitle("Systock")
-        self.setWindowIcon(QIcon("assets/logo1.ico"))
+        self.setWindowTitle("EM COLLECTION")
+        self.setWindowIcon(QIcon("assets/Logo1.ico"))
         self.resize(800, 600)
 
         self.setStyleSheet("background-color: white;")
@@ -62,10 +63,12 @@ class MainApp(QWidget):
         #self.crediFactura = CrediFactura_View()
         self.pagoCredito = PagoCredito_View()
         self.Clientes = Cliente_View()
+        self.cambio = Cambio_View()
         
         self.stacked_widget.addWidget(self.caja)  # Índice 4
         self.stacked_widget.addWidget(self.ventasA)  # Índice 0
         self.stacked_widget.addWidget(self.ventasB)  # Índice 1
+        self.stacked_widget.addWidget(self.cambio)  # Índice 1
         #self.stacked_widget.addWidget(self.ventasCredito)  # Índice 1
         self.stacked_widget.addWidget(self.facturas)  # Índice 2
         # self.stacked_widget.addWidget(self.crediFactura)  # Índice 3
@@ -83,6 +86,9 @@ class MainApp(QWidget):
         )
         self.navbar.BtnCaja.clicked.connect(
             lambda: self.stacked_widget.setCurrentWidget(self.caja)
+        )
+        self.navbar.BtnCambio.clicked.connect(
+            lambda: self.stacked_widget.setCurrentWidget(self.cambio)
         )
         """self.navbar.BtnCredito.clicked.connect(
             lambda: self.stacked_widget.setCurrentWidget(self.ventasCredito)

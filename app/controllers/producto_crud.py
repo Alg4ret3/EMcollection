@@ -54,7 +54,7 @@ def crear_producto(
 
     # Si no envían reventa, se calcula automático (25%)
     if not precio_venta_reventa:
-        precio_venta_reventa = calcular_precio(precio_costo, 0.25)
+        precio_venta_reventa = calcular_precio(precio_costo, 0.31)
 
     nuevo_producto = Productos(
         ID_Producto=id_producto,
@@ -227,7 +227,7 @@ def actualizar_producto(
     if precio_venta_reventa:
         producto.Precio_venta_reventa = precio_venta_reventa
     elif precio_costo:
-        producto.Precio_venta_reventa = calcular_precio(precio_costo, 0.25)
+        producto.Precio_venta_reventa = calcular_precio(precio_costo, 0.31)
 
     producto.Ganancia_Producto_normal = calcular_ganancia(
         producto.Precio_venta_normal, producto.Precio_costo

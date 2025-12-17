@@ -28,6 +28,7 @@ class Productos_View(QWidget, Ui_Productos):
         self.InputCantidadMax.setPlaceholderText("Ej: 99")
         self.InputPrecioCompra.setPlaceholderText("Ej: 2500")
         self.InputPrecioUnitario.setPlaceholderText("Ej: 50%")
+        self.InputPrecioReventa.setPlaceholderText("Ej: 31%")
         self.InputPrecioMayor.setPlaceholderText("Ej: 35%")
         self.InputCodigo.textChanged.connect(self.verififcarInput)
         
@@ -56,6 +57,7 @@ class Productos_View(QWidget, Ui_Productos):
         configurar_validador_numerico(self.InputCantidadMin)
         configurar_validador_numerico(self.InputPrecioMayor)
         configurar_validador_numerico(self.InputPrecioCompra)
+        configurar_validador_numerico(self.InputPrecioReventa)
 
         configurar_validador_texto_y_numeros(self.InputNombre)
         configurar_validador_texto(self.InputMarca)
@@ -88,6 +90,7 @@ class Productos_View(QWidget, Ui_Productos):
         self.InputCategoria.returnPressed.connect(self.editar_producto)
         self.InputPrecioUnitario.returnPressed.connect(self.editar_producto)
         self.InputPrecioMayor.returnPressed.connect(self.editar_producto)
+        self.InputPrecioReventa.returnPressed.connect(self.editar_producto)
 
         # Conectar el evento de tecla Enter para procesar el código
         self.InputCodigo.returnPressed.connect(self.procesar_codigo)
@@ -134,6 +137,8 @@ class Productos_View(QWidget, Ui_Productos):
         elif self.focusWidget() == self.InputPrecioUnitario:
             self.InputPrecioMayor.setFocus()
         elif self.focusWidget() == self.InputPrecioMayor:
+            self.InputPrecioReventa.setFocus()
+        elif self.focusWidget() == self.InputPrecioReventa:
             self.InputCodigo.setFocus()  # Volver al inicio
 
     def navegar_widgets_atras(self):
@@ -141,7 +146,10 @@ class Productos_View(QWidget, Ui_Productos):
         Navega entre los widgets hacia atrás según el orden definido.
         """
         if self.focusWidget() == self.InputCodigo:
+            self.InputPrecioReventa.setFocus()
+        elif self.focusWidget() == self.InputPrecioReventa:         
             self.InputPrecioMayor.setFocus()
+        
         elif self.focusWidget() == self.InputPrecioMayor:
             self.InputPrecioUnitario.setFocus()
         elif self.focusWidget() == self.InputPrecioUnitario:
@@ -177,18 +185,22 @@ class Productos_View(QWidget, Ui_Productos):
         if not precio_compra:
             self.InputPrecioUnitario.setPlaceholderText("")
             self.InputPrecioMayor.setPlaceholderText("")
+            self.InputPrecioReventa.setPlaceholderText("")
             return
 
         precio_compra = float(precio_compra)
 
         precio_unitario = precio_compra + (precio_compra * 0.5)
         precio_mayor = precio_compra + (precio_compra * 0.35)
+        precio_reventa = precio_compra + (precio_compra * 0.31)
 
         precio_unitario = redondear_a_cientos(precio_unitario)
         precio_mayor = redondear_a_cientos(precio_mayor)
+        precio_reventa = redondear_a_cientos(precio_reventa)
 
         self.InputPrecioUnitario.setPlaceholderText(f"{precio_unitario}")
         self.InputPrecioMayor.setPlaceholderText(f"{precio_mayor}")
+        self.InputPrecioReventa.setPlaceholderText(f"{precio_reventa}")
 
     def redondear_a_cientos(numero):
         """
@@ -662,6 +674,7 @@ class Productos_View(QWidget, Ui_Productos):
         self.InputCategoria.setText("")
         self.InputPrecioUnitario.setText("")
         self.InputPrecioMayor.setText("")
+        self.InputPrecioReventa.setText("")
 
 
     def limpiar_formulario_codigo(self):
@@ -677,6 +690,7 @@ class Productos_View(QWidget, Ui_Productos):
         self.InputCategoria.setText("")
         self.InputPrecioUnitario.setText("")
         self.InputPrecioMayor.setText("")
+        self.InputPrecioReventa.setText("")
 
     def eliminar_productos(self):
         """

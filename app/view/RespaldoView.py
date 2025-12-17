@@ -75,7 +75,7 @@ class Respaldo_View(QWidget, Ui_Respaldo):
 
         elif opcion == "Exportar toda la base de datos":
             fecha_actual = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-            nombre_archivo = f"LadyNailShop_{fecha_actual}.db"
+            nombre_archivo = f"EmCollection_{fecha_actual}.db"
             ruta_exportar, _ = QFileDialog.getSaveFileName(
                 self,
                 "Exportar Base de Datos",
