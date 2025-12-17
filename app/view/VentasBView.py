@@ -300,8 +300,8 @@ class VentasB_View(QWidget, Ui_VentasB):
                 items.append((description, quantity, precio_unitario, value))
                 produc_datos.append((codigo, quantity, precio_unitario))
                 
-            if cantidad_total <= 6:
-                QMessageBox.warning(self, "Error", "El minimo para realizar la venta es 6 unidades.")
+            if cantidad_total < 6:
+                QMessageBox.warning(self, "Error", f"El minimo para realizar la venta es 6 unidades. {cantidad_total}")
                 return
 
             # Calcular totales
