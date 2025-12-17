@@ -276,6 +276,7 @@ class VentasB_View(QWidget, Ui_VentasB):
             self.verificar_cliente(client_id, client_name, client_address, client_phone)
 
             db = SessionLocal()
+            cantidad_total = 0
 
             # Obtener los artículos de la tabla
             produc_datos = []
@@ -284,6 +285,7 @@ class VentasB_View(QWidget, Ui_VentasB):
                 codigo = self.TablaVentaMayor.item(row, 0).text()
                 description = self.TablaVentaMayor.item(row, 1).text()
                 quantity = int(self.TablaVentaMayor.item(row, 4).text())
+                cantidad_total += quantity
                 precio_unitario = float(self.TablaVentaMayor.item(row, 5).text())
                 value = float(self.TablaVentaMayor.item(row, 6).text())
 
@@ -297,11 +299,15 @@ class VentasB_View(QWidget, Ui_VentasB):
 
                 items.append((description, quantity, precio_unitario, value))
                 produc_datos.append((codigo, quantity, precio_unitario))
+                
+            if cantidad_total <= 6:
+                QMessageBox.warning(self, "Error", "El minimo para realizar la venta es 6 unidades.")
+                return
 
             # Calcular totales
             subtotal = sum(item[3] for item in items)
             delivery_fee = float(self.InputDomicilio.text()) if self.InputDomicilio.text() else 0.0
-            total = (subtotal + delivery_fee) - descuento
+            total = (subtotal + delivery_fee) #- descuento
 
             domicilio = True if delivery_fee > 0 else False
 
@@ -315,7 +321,7 @@ class VentasB_View(QWidget, Ui_VentasB):
                     stock_actual = producto.Stock_actual - quantity
                     actualizar_producto(db, id_producto=int(codigo), stock_actual=stock_actual)
 
-                id_factura = self.guardar_factura(db, client_id, payment_method, produc_datos, monto_pago, descuento, self.usuario_actual_id, domicilio)
+                id_factura = self.guardar_factura(db, client_id, payment_method, produc_datos, monto_pago, 0.0, self.usuario_actual_id, domicilio)
                 self.invoice_number = f"0000{id_factura}"
                 mensaje = "Factura generada exitosamente."
 

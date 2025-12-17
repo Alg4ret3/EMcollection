@@ -584,16 +584,16 @@ class VentasA_View(QWidget, Ui_VentasA):
                     print(f"Error al procesar el nombre del cliente: {e}")
                     return
                 # Crear un nuevo cliente si no existe 
-                nuevo_cliente = crear_cliente( 
-                    db=db, 
-                    id_cliente=cedula, 
-                    nombre=nombre, 
-                    apellido=apellido, 
-                    direccion=direccion, 
-                    telefono=telefono, 
-                ) 
-                if nuevo_cliente:
-                    QMessageBox.information(self, "Cliente creado", "El cliente ha sido creado exitosamente") 
+                # nuevo_cliente = crear_cliente( 
+                #     db=db, 
+                #     id_cliente=cedula, 
+                #     nombre=nombre, 
+                #     apellido=apellido, 
+                #     direccion=direccion, 
+                #     telefono=telefono, 
+                # ) 
+                # if nuevo_cliente:
+                #     QMessageBox.information(self, "Cliente creado", "El cliente ha sido creado exitosamente") 
  
         except Exception as e: 
             QMessageBox.critical(self, "Error", f"Error al procesar el cliente: {str(e)}") 
