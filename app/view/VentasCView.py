@@ -18,7 +18,7 @@ from ..controllers.tipo_ingreso_crud import *
 from ..controllers.clientes_crud import *
 from ..controllers.ingresos_crud import *
 from ..controllers.historial_modificacion_crud import *
-from ..ui import Ui_VentasA
+from ..ui import Ui_VentasC
 from ..utils.autocomplementado import configurar_autocompletado
 from PyQt5.QtCore import Qt
 
@@ -32,8 +32,9 @@ import win32ui
 import win32con
 import datetime
 
-class VentasC_View(QWidget, Ui_VentasA):
-    cambiar_a_ventanab = pyqtSignal()
+class VentasC_View(QWidget, Ui_VentasC):
+    cambiar_a_ventanaA = pyqtSignal()
+    cambiar_a_ventanaB = pyqtSignal()
     
     def __init__(self, parent=None):
         super(VentasC_View, self).__init__(parent)
@@ -58,7 +59,7 @@ class VentasC_View(QWidget, Ui_VentasA):
         self.InputNombreCli.setPlaceholderText("Ej: Pepito Perez")
         self.InputTelefonoCli.setPlaceholderText("Ej: 3170065430")
         self.InputDireccion.setPlaceholderText("Ej: Calle 1, 123 - Piso 1")
-        self.BtnFacturaA.setStyleSheet("""
+        self.BtnFacturaC.setStyleSheet("""
             QPushButton {
                 background-color: red; 
             }
@@ -66,7 +67,7 @@ class VentasC_View(QWidget, Ui_VentasA):
         self.InputCodigo.setPlaceholderText("Ej: 7709991003078")
         self.InputNombre.setPlaceholderText("Ej: Esmalte")
         self.InputDomicilio.setPlaceholderText("Ej: 5000")
-        self.InputDescuento.setPlaceholderText("Ej: 500")
+        # self.InputDescuento.setPlaceholderText("Ej: 500")
         # Inicialización y configuración
         self.limpiar_tabla()
         self.configurar_localizacion()
@@ -82,13 +83,14 @@ class VentasC_View(QWidget, Ui_VentasA):
         self.InputDomicilio.textChanged.connect(self.actualizar_total)
         self.InputCedula.textChanged.connect(self.validar_campos)
         self.InputCedula.returnPressed.connect(self.completar_campos)
-        self.InputDescuento.textChanged.connect(self.aplicar_descuento)
+        # self.InputDescuento.textChanged.connect(self.aplicar_descuento)
         self.MetodoPagoBox.currentIndexChanged.connect(self.configuracion_pago)
         configurar_autocompletado(self.InputNombre, obtener_productos, "Nombre", self.db, self.procesar_codigo)
         configurar_autocompletado(self.InputNombreCli, obtener_cliente_nombre_apellido, "NombreCompleto", self.db, self.insertar_cliente)
 
         # Conexiones de señales - Botones y tabla
-        self.BtnFacturaB.clicked.connect(self.cambiar_a_ventanab)
+        self.BtnFacturaA.clicked.connect(self.cambiar_a_ventanaA)
+        self.BtnFacturaB.clicked.connect(self.cambiar_a_ventanaB)
         self.BtnGenerarVenta.clicked.connect(self.generar_venta)
         self.BtnEliminar.clicked.connect(self.eliminar_fila)
         self.tableWidget.cellClicked.connect(self.cargar_datos)
@@ -182,7 +184,7 @@ class VentasC_View(QWidget, Ui_VentasA):
         self.InputTelefonoCli.setText(str(client_phone))
         self.InputDireccion.setText(str(client_address))
         self.InputPago.setText(str(pago))
-        self.InputDescuento.setText(str(delivery_fee))
+        # self.InputDescuento.setText(str(delivery_fee))
         self.LabelSubtotal.setText(f"{subtotal:,.2f}")
         self.LabelTotal.setText(f"{total:,.2f}")
         self.MetodoPagoBox.setCurrentText(payment_method)
@@ -219,7 +221,7 @@ class VentasC_View(QWidget, Ui_VentasA):
             client_phone = self.InputTelefonoCli.text().strip()
             monto_pago = self.InputPago.text().strip()
             payment_method = self.MetodoPagoBox.currentText().strip()
-            descuento = float(self.InputDescuento.text().strip()) if self.InputDescuento.text() else 0.0
+            # descuento = float(self.InputDescuento.text().strip()) if self.InputDescuento.text() else 0.0
             subtotal = self.LabelSubtotal.text()
             subtotal = float(subtotal.replace(",", ""))
             
@@ -1040,57 +1042,57 @@ class VentasC_View(QWidget, Ui_VentasA):
 
         self.LabelTotal.setText(f"{total_formateado}")
             
-    def aplicar_descuento(self):
-        try:
-            # Obtener el valor del descuento desde el campo de texto
-            descuento_str = self.InputDescuento.text().strip()
+    # def aplicar_descuento(self):
+    #     try:
+    #         # Obtener el valor del descuento desde el campo de texto
+    #         descuento_str = self.InputDescuento.text().strip()
 
-            # Si el campo está vacío, asignar 0 al descuento (sin necesidad de actualizar visualmente a 0)
-            if descuento_str == "":
-                descuento = 0
-            else:
-                descuento = float(descuento_str)
-                if descuento < 0:  # Validar que el descuento no sea negativo
-                    raise ValueError("El descuento no puede ser negativo.")
+    #         # Si el campo está vacío, asignar 0 al descuento (sin necesidad de actualizar visualmente a 0)
+    #         if descuento_str == "":
+    #             descuento = 0
+    #         else:
+    #             descuento = float(descuento_str)
+    #             if descuento < 0:  # Validar que el descuento no sea negativo
+    #                 raise ValueError("El descuento no puede ser negativo.")
         
-        except ValueError:
-            # Si hay un error al convertir el descuento (ej. no es un número válido)
-            QMessageBox.warning(self, "Error", "Valor de descuento no válido.")
-            self.InputDescuento.clear()
-            return
+    #     except ValueError:
+    #         # Si hay un error al convertir el descuento (ej. no es un número válido)
+    #         QMessageBox.warning(self, "Error", "Valor de descuento no válido.")
+    #         self.InputDescuento.clear()
+    #         return
 
-        # Calcular el subtotal antes del descuento
-        subtotal_antes_descuento = self.calcular_subtotal()
+    #     # Calcular el subtotal antes del descuento
+    #     subtotal_antes_descuento = self.calcular_subtotal()
 
-        # Validar que el descuento no sea mayor al subtotal
-        if descuento > subtotal_antes_descuento:
-            QMessageBox.warning(self, "Error", "El descuento no puede ser mayor al subtotal.")
-            self.InputDescuento.clear()
-            return
+    #     # Validar que el descuento no sea mayor al subtotal
+    #     if descuento > subtotal_antes_descuento:
+    #         QMessageBox.warning(self, "Error", "El descuento no puede ser mayor al subtotal.")
+    #         self.InputDescuento.clear()
+    #         return
 
-        # Aplicar el descuento
-        nuevo_subtotal = subtotal_antes_descuento - descuento
+    #     # Aplicar el descuento
+    #     nuevo_subtotal = subtotal_antes_descuento - descuento
 
-        # Obtener el valor del domicilio
-        domicilio = self.obtener_valor_domicilio()
+    #     # Obtener el valor del domicilio
+    #     domicilio = self.obtener_valor_domicilio()
 
-        # Calcular el total final considerando el domicilio
-        total = nuevo_subtotal + domicilio
+    #     # Calcular el total final considerando el domicilio
+    #     total = nuevo_subtotal + domicilio
 
-        # Formatear el subtotal y total con 2 decimales si es necesario
-        if nuevo_subtotal.is_integer():
-            subtotal_formateado = f"{nuevo_subtotal:,.0f}"
-        else:
-            subtotal_formateado = f"{nuevo_subtotal:,.2f}"
+    #     # Formatear el subtotal y total con 2 decimales si es necesario
+    #     if nuevo_subtotal.is_integer():
+    #         subtotal_formateado = f"{nuevo_subtotal:,.0f}"
+    #     else:
+    #         subtotal_formateado = f"{nuevo_subtotal:,.2f}"
 
-        if total.is_integer():
-            total_formateado = f"{total:,.0f}"
-        else:
-            total_formateado = f"{total:,.2f}"
+    #     if total.is_integer():
+    #         total_formateado = f"{total:,.0f}"
+    #     else:
+    #         total_formateado = f"{total:,.2f}"
 
-        # Actualizar los labels de la interfaz en tiempo real
-        self.LabelSubtotal.setText(f"{subtotal_formateado}")
-        self.LabelTotal.setText(f"{total_formateado}")
+    #     # Actualizar los labels de la interfaz en tiempo real
+    #     self.LabelSubtotal.setText(f"{subtotal_formateado}")
+    #     self.LabelTotal.setText(f"{total_formateado}")
         
     def cargar_datos(self, row, column):
         try:
@@ -1332,10 +1334,10 @@ class VentasC_View(QWidget, Ui_VentasA):
             r"^\d+\.\d+$"
         )  # Expresión para números y puntos
         validator_descuento = QRegularExpressionValidator(rx_descuento)
-        self.InputDescuento.setValidator(validator_descuento)
+        # self.InputDescuento.setValidator(validator_descuento)
         rx_descuento = QRegularExpression(r"^\d+$")  # Permite numeros enteros
         validator_descuento = QRegularExpressionValidator(rx_descuento)
-        self.InputDescuento.setValidator(validator_descuento)
+        # self.InputDescuento.setValidator(validator_descuento)
 
     def completar_campos(self):
 
@@ -1413,7 +1415,7 @@ class VentasC_View(QWidget, Ui_VentasA):
         self.InputNombreCli.clear() 
         self.InputTelefonoCli.clear()
         self.InputDireccion.clear()    
-        self.InputDescuento.clear()
+        # self.InputDescuento.clear()
         self.InputPago.clear()
         self.LabelTotal.setText("$")
         self.LabelSubtotal.setText("$")

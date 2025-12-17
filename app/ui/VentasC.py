@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\VentasB.ui'
+# Form implementation generated from reading ui file '.\VentasC.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.11
 #
@@ -11,15 +11,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(1358, 1082)
-        Form.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+class Ui_VentasC(object):
+    def setupUi(self, VentasC):
+        VentasC.setObjectName("VentasC")
+        VentasC.resize(1390, 1072)
+        VentasC.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(Form)
+        self.horizontalLayout = QtWidgets.QHBoxLayout(VentasC)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.Contenedor = QtWidgets.QWidget(Form)
+        self.Contenedor = QtWidgets.QWidget(VentasC)
         self.Contenedor.setStyleSheet("\n"
 "QPushButton {\n"
 "    background-color: black; /* Fondo blanco */\n"
@@ -288,57 +288,17 @@ class Ui_Form(object):
 "")
         self.LabelVentasA.setObjectName("LabelVentasA")
         self.gridLayout_2.addWidget(self.LabelVentasA, 0, 0, 1, 1)
-        self.InputPrecioMayor = QtWidgets.QLineEdit(self.widget_3)
+        self.InputPrecioUnitario = QtWidgets.QLineEdit(self.widget_3)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.InputPrecioMayor.sizePolicy().hasHeightForWidth())
-        self.InputPrecioMayor.setSizePolicy(sizePolicy)
-        self.InputPrecioMayor.setMinimumSize(QtCore.QSize(250, 50))
-        self.InputPrecioMayor.setMaximumSize(QtCore.QSize(250, 50))
-        self.InputPrecioMayor.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.InputPrecioMayor.setObjectName("InputPrecioMayor")
-        self.gridLayout_2.addWidget(self.InputPrecioMayor, 3, 5, 1, 1)
-        self.BtnFacturaA = QtWidgets.QPushButton(self.widget_3)
-        self.BtnFacturaA.setStyleSheet("\n"
-"QPushButton {\n"
-"    background-color: black; /* Fondo blanco */\n"
-"    border: none; /* Sin borde ni decoración inicial */\n"
-"    color:  white; /* Color del texto */\n"
-"    border-radius: 15px; /* Bordes circulares */\n"
-"    padding: 5px 10px; /* Espaciado interno para mejor apariencia */\n"
-"    height: 40px; /* Altura del botón */\n"
-"    text-align: center; /* Alinea el texto del botón a la izquierda */\n"
-"    font-size: 18px; /* Tamaño de fuente */\n"
-"    margin-top:20px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */\n"
-"    cursor: pointer; /* Cursor de mano al pasar sobre el botón */\n"
-"}")
-        self.BtnFacturaA.setObjectName("BtnFacturaA")
-        self.gridLayout_2.addWidget(self.BtnFacturaA, 0, 3, 1, 1, QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
-        self.BtnFacturaB = QtWidgets.QPushButton(self.widget_3)
-        self.BtnFacturaB.setStyleSheet("\n"
-"QPushButton {\n"
-"    background-color: black; /* Fondo blanco */\n"
-"    border: none; /* Sin borde ni decoración inicial */\n"
-"    color:  white; /* Color del texto */\n"
-"    border-radius: 15px; /* Bordes circulares */\n"
-"    padding: 5px 10px; /* Espaciado interno para mejor apariencia */\n"
-"    height: 40px; /* Altura del botón */\n"
-"    text-align: center; /* Alinea el texto del botón a la izquierda */\n"
-"    font-size: 18px; /* Tamaño de fuente */\n"
-"    margin-top:20px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */\n"
-"    cursor: pointer; /* Cursor de mano al pasar sobre el botón */\n"
-"}")
-        self.BtnFacturaB.setObjectName("BtnFacturaB")
-        self.gridLayout_2.addWidget(self.BtnFacturaB, 0, 5, 1, 1, QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        sizePolicy.setHeightForWidth(self.InputPrecioUnitario.sizePolicy().hasHeightForWidth())
+        self.InputPrecioUnitario.setSizePolicy(sizePolicy)
+        self.InputPrecioUnitario.setMinimumSize(QtCore.QSize(250, 50))
+        self.InputPrecioUnitario.setMaximumSize(QtCore.QSize(250, 50))
+        self.InputPrecioUnitario.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.InputPrecioUnitario.setObjectName("InputPrecioUnitario")
+        self.gridLayout_2.addWidget(self.InputPrecioUnitario, 3, 5, 1, 1)
         self.BtnEliminar = QtWidgets.QPushButton(self.widget_3)
         self.BtnEliminar.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.BtnEliminar.setStyleSheet("\n"
@@ -365,6 +325,68 @@ class Ui_Form(object):
         self.BtnEliminar.setIconSize(QtCore.QSize(30, 30))
         self.BtnEliminar.setObjectName("BtnEliminar")
         self.gridLayout_2.addWidget(self.BtnEliminar, 5, 5, 1, 1)
+        self.BtnFacturaA = QtWidgets.QPushButton(self.widget_3)
+        self.BtnFacturaA.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.BtnFacturaA.setStyleSheet("\n"
+"QPushButton {\n"
+"    background-color: black; /* Fondo blanco */\n"
+"    border: none; /* Sin borde ni decoración inicial */\n"
+"    color:  white; /* Color del texto */\n"
+"    border-radius: 15px; /* Bordes circulares */\n"
+"    padding: 5px 10px; /* Espaciado interno para mejor apariencia */\n"
+"    height: 40px; /* Altura del botón */\n"
+"    text-align: center; /* Alinea el texto del botón a la izquierda */\n"
+"    font-size: 18px; /* Tamaño de fuente */\n"
+"    margin-top:20px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */\n"
+"    cursor: pointer; /* Cursor de mano al pasar sobre el botón */\n"
+"}")
+        self.BtnFacturaA.setObjectName("BtnFacturaA")
+        self.gridLayout_2.addWidget(self.BtnFacturaA, 0, 2, 1, 1)
+        self.BtnFacturaB = QtWidgets.QPushButton(self.widget_3)
+        self.BtnFacturaB.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.BtnFacturaB.setStyleSheet("\n"
+"QPushButton {\n"
+"    background-color: black; /* Fondo blanco */\n"
+"    border: none; /* Sin borde ni decoración inicial */\n"
+"    color:  white; /* Color del texto */\n"
+"    border-radius: 15px; /* Bordes circulares */\n"
+"    padding: 5px 10px; /* Espaciado interno para mejor apariencia */\n"
+"    height: 40px; /* Altura del botón */\n"
+"    text-align: center; /* Alinea el texto del botón a la izquierda */\n"
+"    font-size: 18px; /* Tamaño de fuente */\n"
+"    margin-top:20px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */\n"
+"    cursor: pointer; /* Cursor de mano al pasar sobre el botón */\n"
+"}")
+        self.BtnFacturaB.setObjectName("BtnFacturaB")
+        self.gridLayout_2.addWidget(self.BtnFacturaB, 0, 3, 1, 1)
+        self.BtnFacturaC = QtWidgets.QPushButton(self.widget_3)
+        self.BtnFacturaC.setStyleSheet("\n"
+"QPushButton {\n"
+"    background-color: black; /* Fondo blanco */\n"
+"    border: none; /* Sin borde ni decoración inicial */\n"
+"    color:  white; /* Color del texto */\n"
+"    border-radius: 15px; /* Bordes circulares */\n"
+"    padding: 5px 10px; /* Espaciado interno para mejor apariencia */\n"
+"    height: 40px; /* Altura del botón */\n"
+"    text-align: center; /* Alinea el texto del botón a la izquierda */\n"
+"    font-size: 18px; /* Tamaño de fuente */\n"
+"    margin-top:20px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */\n"
+"    cursor: pointer; /* Cursor de mano al pasar sobre el botón */\n"
+"}")
+        self.BtnFacturaC.setObjectName("BtnFacturaC")
+        self.gridLayout_2.addWidget(self.BtnFacturaC, 0, 5, 1, 1)
         self.gridLayout.addLayout(self.gridLayout_2, 0, 0, 1, 1)
         self.verticalLayout_2.addWidget(self.widget_3)
         self.widget = QtWidgets.QWidget(self.ContenidoPage1)
@@ -372,20 +394,20 @@ class Ui_Form(object):
         self.widget.setObjectName("widget")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.widget)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.TablaVentaMayor = QtWidgets.QTableWidget(self.widget)
+        self.tableWidget = QtWidgets.QTableWidget(self.widget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.TablaVentaMayor.sizePolicy().hasHeightForWidth())
-        self.TablaVentaMayor.setSizePolicy(sizePolicy)
-        self.TablaVentaMayor.setMinimumSize(QtCore.QSize(845, 300))
+        sizePolicy.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
+        self.tableWidget.setSizePolicy(sizePolicy)
+        self.tableWidget.setMinimumSize(QtCore.QSize(845, 300))
         font = QtGui.QFont()
         font.setFamily("MS Shell Dlg 2")
         font.setPointSize(11)
         font.setBold(True)
         font.setWeight(75)
-        self.TablaVentaMayor.setFont(font)
-        self.TablaVentaMayor.setStyleSheet("\n"
+        self.tableWidget.setFont(font)
+        self.tableWidget.setStyleSheet("\n"
 "QTableWidget {\n"
 "    border: none;\n"
 "    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave alrededor de la tabla */\n"
@@ -487,66 +509,66 @@ class Ui_Form(object):
 "    background: #888; /* Color más oscuro cuando el control deslizante está siendo desplazado */\n"
 "}\n"
 "")
-        self.TablaVentaMayor.setObjectName("TablaVentaMayor")
-        self.TablaVentaMayor.setColumnCount(7)
-        self.TablaVentaMayor.setRowCount(16)
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.setColumnCount(7)
+        self.tableWidget.setRowCount(16)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(0, item)
+        self.tableWidget.setVerticalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(1, item)
+        self.tableWidget.setVerticalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(2, item)
+        self.tableWidget.setVerticalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(3, item)
+        self.tableWidget.setVerticalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(4, item)
+        self.tableWidget.setVerticalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(5, item)
+        self.tableWidget.setVerticalHeaderItem(5, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(6, item)
+        self.tableWidget.setVerticalHeaderItem(6, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(7, item)
+        self.tableWidget.setVerticalHeaderItem(7, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(8, item)
+        self.tableWidget.setVerticalHeaderItem(8, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(9, item)
+        self.tableWidget.setVerticalHeaderItem(9, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(10, item)
+        self.tableWidget.setVerticalHeaderItem(10, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(11, item)
+        self.tableWidget.setVerticalHeaderItem(11, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(12, item)
+        self.tableWidget.setVerticalHeaderItem(12, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(13, item)
+        self.tableWidget.setVerticalHeaderItem(13, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(14, item)
+        self.tableWidget.setVerticalHeaderItem(14, item)
         item = QtWidgets.QTableWidgetItem()
-        self.TablaVentaMayor.setVerticalHeaderItem(15, item)
+        self.tableWidget.setVerticalHeaderItem(15, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
         font = QtGui.QFont()
         font.setKerning(False)
         item.setFont(font)
-        self.TablaVentaMayor.setHorizontalHeaderItem(0, item)
+        self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.TablaVentaMayor.setHorizontalHeaderItem(1, item)
+        self.tableWidget.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.TablaVentaMayor.setHorizontalHeaderItem(2, item)
+        self.tableWidget.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.TablaVentaMayor.setHorizontalHeaderItem(3, item)
+        self.tableWidget.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.TablaVentaMayor.setHorizontalHeaderItem(4, item)
+        self.tableWidget.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.TablaVentaMayor.setHorizontalHeaderItem(5, item)
+        self.tableWidget.setHorizontalHeaderItem(5, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.TablaVentaMayor.setHorizontalHeaderItem(6, item)
-        self.verticalLayout_3.addWidget(self.TablaVentaMayor, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        self.tableWidget.setHorizontalHeaderItem(6, item)
+        self.verticalLayout_3.addWidget(self.tableWidget, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
         self.verticalLayout_2.addWidget(self.widget)
         self.widget_4 = QtWidgets.QWidget(self.ContenidoPage1)
         self.widget_4.setStyleSheet("")
@@ -566,7 +588,6 @@ class Ui_Form(object):
         self.InputDireccion.setSizePolicy(sizePolicy)
         self.InputDireccion.setMinimumSize(QtCore.QSize(250, 50))
         self.InputDireccion.setMaximumSize(QtCore.QSize(250, 50))
-        self.InputDireccion.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
         self.InputDireccion.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.InputDireccion.setObjectName("InputDireccion")
         self.gridLayout_4.addWidget(self.InputDireccion, 2, 3, 1, 1)
@@ -579,8 +600,7 @@ class Ui_Form(object):
         self.LabelSubtotal.setMinimumSize(QtCore.QSize(250, 50))
         self.LabelSubtotal.setMaximumSize(QtCore.QSize(250, 50))
         self.LabelSubtotal.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
-        self.LabelSubtotal.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"")
+        self.LabelSubtotal.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.LabelSubtotal.setObjectName("LabelSubtotal")
         self.gridLayout_4.addWidget(self.LabelSubtotal, 3, 3, 1, 1)
         self.label_9 = QtWidgets.QLabel(self.widget_4)
@@ -598,8 +618,29 @@ class Ui_Form(object):
         self.InputCedula.setMinimumSize(QtCore.QSize(250, 50))
         self.InputCedula.setMaximumSize(QtCore.QSize(250, 50))
         self.InputCedula.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.InputCedula.setObjectName("InputCedula")
+        self.InputCedula.setObjectName("InputCedula\n""")
         self.gridLayout_4.addWidget(self.InputCedula, 2, 0, 1, 1)
+        self.BtnGenerarVenta = QtWidgets.QPushButton(self.widget_4)
+        self.BtnGenerarVenta.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.BtnGenerarVenta.setStyleSheet("\n"
+"QPushButton {\n"
+"    background-color: black; /* Fondo blanco */\n"
+"    border: none; /* Sin borde ni decoración inicial */\n"
+"    color:  white; /* Color del texto */\n"
+"    border-radius: 15px; /* Bordes circulares */\n"
+"    padding: 5px 10px; /* Espaciado interno para mejor apariencia */\n"
+"    height: 40px; /* Altura del botón */\n"
+"    text-align: center; /* Alinea el texto del botón a la izquierda */\n"
+"    font-size: 18px; /* Tamaño de fuente */\n"
+"    margin-top:20px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */\n"
+"    cursor: pointer; /* Cursor de mano al pasar sobre el botón */\n"
+"}")
+        self.BtnGenerarVenta.setObjectName("BtnGenerarVenta")
+        self.gridLayout_4.addWidget(self.BtnGenerarVenta, 4, 5, 1, 1)
         self.InputTelefonoCli = QtWidgets.QLineEdit(self.widget_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -700,124 +741,90 @@ class Ui_Form(object):
 "    selection-color: white; /* Texto blanco al seleccionar */\n"
 "    border-radius: 10px; /* Bordes redondeados */\n"
 "}\n"
-"\n"
 "")
+        self.MetodoPagoBox.setInsertPolicy(QtWidgets.QComboBox.NoInsert)
+        self.MetodoPagoBox.setFrame(True)
         self.MetodoPagoBox.setObjectName("MetodoPagoBox")
         self.gridLayout_4.addWidget(self.MetodoPagoBox, 4, 0, 1, 1)
-        self.InputDescuentoB = QtWidgets.QLineEdit(self.widget_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.InputDescuentoB.sizePolicy().hasHeightForWidth())
-        self.InputDescuentoB.setSizePolicy(sizePolicy)
-        self.InputDescuentoB.setMinimumSize(QtCore.QSize(250, 50))
-        self.InputDescuentoB.setMaximumSize(QtCore.QSize(250, 50))
-        self.InputDescuentoB.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.InputDescuentoB.setObjectName("InputDescuentoB")
-        self.gridLayout_4.addWidget(self.InputDescuentoB, 2, 4, 1, 1)
-        self.label_2 = QtWidgets.QLabel(self.widget_4)
-        self.label_2.setObjectName("label_2")
-        self.gridLayout_4.addWidget(self.label_2, 1, 4, 1, 1)
-        self.BtnGenerarVenta = QtWidgets.QPushButton(self.widget_4)
-        self.BtnGenerarVenta.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.BtnGenerarVenta.setStyleSheet("\n"
-"QPushButton {\n"
-"    background-color: black; /* Fondo blanco */\n"
-"    border: none; /* Sin borde ni decoración inicial */\n"
-"    color:  white; /* Color del texto */\n"
-"    border-radius: 15px; /* Bordes circulares */\n"
-"    padding: 5px 10px; /* Espaciado interno para mejor apariencia */\n"
-"    height: 40px; /* Altura del botón */\n"
-"    text-align: center; /* Alinea el texto del botón a la izquierda */\n"
-"    font-size: 18px; /* Tamaño de fuente */\n"
-"    margin-top:20px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(106, 106, 106); /* Gris claro al pasar el mouse */\n"
-"    cursor: pointer; /* Cursor de mano al pasar sobre el botón */\n"
-"}")
-        self.BtnGenerarVenta.setObjectName("BtnGenerarVenta")
-        self.gridLayout_4.addWidget(self.BtnGenerarVenta, 4, 4, 1, 1)
         self.gridLayout_3.addLayout(self.gridLayout_4, 0, 0, 1, 1)
         self.verticalLayout_2.addWidget(self.widget_4, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
         self.Contenido.addWidget(self.ContenidoPage1)
         self.horizontalLayout_2.addWidget(self.Contenido)
         self.horizontalLayout.addWidget(self.Contenedor)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(VentasC)
+        QtCore.QMetaObject.connectSlotsByName(VentasC)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, VentasC):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.label_3.setText(_translate("Form", "Código"))
-        self.label_6.setText(_translate("Form", "Marca"))
-        self.label.setText(_translate("Form", "Precio por Mayor"))
-        self.label_5.setText(_translate("Form", "Nombre"))
-        self.label_7.setText(_translate("Form", "Cantidad"))
-        self.label_30.setText(_translate("Form", "Productos"))
-        self.label_8.setText(_translate("Form", "Valor Domicilio"))
-        self.LabelVentasA.setText(_translate("Form", "Ventas"))
-        self.BtnFacturaA.setText(_translate("Form", "Factura A"))
-        self.BtnFacturaB.setText(_translate("Form", "Factura B"))
-        self.BtnEliminar.setText(_translate("Form", "   Eliminar"))
-        item = self.TablaVentaMayor.verticalHeaderItem(0)
-        item.setText(_translate("Form", "Nueva fila"))
-        item = self.TablaVentaMayor.verticalHeaderItem(1)
-        item.setText(_translate("Form", "Nueva fila"))
-        item = self.TablaVentaMayor.verticalHeaderItem(2)
-        item.setText(_translate("Form", "Nueva fila"))
-        item = self.TablaVentaMayor.verticalHeaderItem(3)
-        item.setText(_translate("Form", "Nueva fila"))
-        item = self.TablaVentaMayor.verticalHeaderItem(4)
-        item.setText(_translate("Form", "Nueva fila"))
-        item = self.TablaVentaMayor.verticalHeaderItem(5)
-        item.setText(_translate("Form", "Nueva fila"))
-        item = self.TablaVentaMayor.verticalHeaderItem(6)
-        item.setText(_translate("Form", "Nueva fila"))
-        item = self.TablaVentaMayor.verticalHeaderItem(7)
-        item.setText(_translate("Form", "Nueva fila"))
-        item = self.TablaVentaMayor.verticalHeaderItem(8)
-        item.setText(_translate("Form", "Nueva fila"))
-        item = self.TablaVentaMayor.verticalHeaderItem(9)
-        item.setText(_translate("Form", "Nueva fila"))
-        item = self.TablaVentaMayor.verticalHeaderItem(10)
-        item.setText(_translate("Form", "Nueva fila"))
-        item = self.TablaVentaMayor.verticalHeaderItem(11)
-        item.setText(_translate("Form", "Nueva fila"))
-        item = self.TablaVentaMayor.verticalHeaderItem(12)
-        item.setText(_translate("Form", "Nueva fila"))
-        item = self.TablaVentaMayor.verticalHeaderItem(13)
-        item.setText(_translate("Form", "Nueva fila"))
-        item = self.TablaVentaMayor.verticalHeaderItem(14)
-        item.setText(_translate("Form", "New Row"))
-        item = self.TablaVentaMayor.verticalHeaderItem(15)
-        item.setText(_translate("Form", "New Row"))
-        item = self.TablaVentaMayor.horizontalHeaderItem(0)
-        item.setText(_translate("Form", "Código"))
-        item = self.TablaVentaMayor.horizontalHeaderItem(1)
-        item.setText(_translate("Form", "Producto"))
-        item = self.TablaVentaMayor.horizontalHeaderItem(2)
-        item.setText(_translate("Form", "Marca"))
-        item = self.TablaVentaMayor.horizontalHeaderItem(3)
-        item.setText(_translate("Form", "Categoria"))
-        item = self.TablaVentaMayor.horizontalHeaderItem(4)
-        item.setText(_translate("Form", "Cantidad"))
-        item = self.TablaVentaMayor.horizontalHeaderItem(5)
-        item.setText(_translate("Form", "PAM"))
-        item = self.TablaVentaMayor.horizontalHeaderItem(6)
-        item.setText(_translate("Form", "Total"))
-        self.label_10.setText(_translate("Form", "Nombre y Apellido: "))
-        self.LabelSubtotal.setText(_translate("Form", "$"))
-        self.label_9.setText(_translate("Form", "Teléfono:"))
-        self.label_12.setText(_translate("Form", "Metodo de Pago"))
-        self.label_14.setText(_translate("Form", "Subtotal"))
-        self.label_31.setText(_translate("Form", "Cliente"))
-        self.label_4.setText(_translate("Form", "Cedula de Ciudadania:"))
-        self.label_11.setText(_translate("Form", "Dirección:"))
-        self.label_13.setText(_translate("Form", "Pago"))
-        self.LabelTotal.setText(_translate("Form", "$"))
-        self.label_15.setText(_translate("Form", "Total"))
-        self.label_2.setText(_translate("Form", "Descuento Global:"))
-        self.BtnGenerarVenta.setText(_translate("Form", "Generar Venta"))
+        VentasC.setWindowTitle(_translate("VentasC", "Form"))
+        self.label_3.setText(_translate("VentasC", "Código"))
+        self.label_6.setText(_translate("VentasC", "Marca"))
+        self.label.setText(_translate("VentasC", "Precio al por Mayor"))
+        self.label_5.setText(_translate("VentasC", "Nombre"))
+        self.label_7.setText(_translate("VentasC", "Cantidad"))
+        self.label_30.setText(_translate("VentasC", "Productos"))
+        self.label_8.setText(_translate("VentasC", "Valor Domicilio"))
+        self.LabelVentasA.setText(_translate("VentasC", "Ventas"))
+        self.BtnEliminar.setText(_translate("VentasC", "   Eliminar"))
+        self.BtnFacturaA.setText(_translate("VentasC", "Detal"))
+        self.BtnFacturaB.setText(_translate("VentasC", "Reventa"))
+        self.BtnFacturaC.setText(_translate("VentasC", "Al por Mayor"))
+        item = self.tableWidget.verticalHeaderItem(0)
+        item.setText(_translate("VentasC", "Nueva fila"))
+        item = self.tableWidget.verticalHeaderItem(1)
+        item.setText(_translate("VentasC", "Nueva fila"))
+        item = self.tableWidget.verticalHeaderItem(2)
+        item.setText(_translate("VentasC", "Nueva fila"))
+        item = self.tableWidget.verticalHeaderItem(3)
+        item.setText(_translate("VentasC", "Nueva fila"))
+        item = self.tableWidget.verticalHeaderItem(4)
+        item.setText(_translate("VentasC", "Nueva fila"))
+        item = self.tableWidget.verticalHeaderItem(5)
+        item.setText(_translate("VentasC", "Nueva fila"))
+        item = self.tableWidget.verticalHeaderItem(6)
+        item.setText(_translate("VentasC", "Nueva fila"))
+        item = self.tableWidget.verticalHeaderItem(7)
+        item.setText(_translate("VentasC", "Nueva fila"))
+        item = self.tableWidget.verticalHeaderItem(8)
+        item.setText(_translate("VentasC", "Nueva fila"))
+        item = self.tableWidget.verticalHeaderItem(9)
+        item.setText(_translate("VentasC", "Nueva fila"))
+        item = self.tableWidget.verticalHeaderItem(10)
+        item.setText(_translate("VentasC", "Nueva fila"))
+        item = self.tableWidget.verticalHeaderItem(11)
+        item.setText(_translate("VentasC", "Nueva fila"))
+        item = self.tableWidget.verticalHeaderItem(12)
+        item.setText(_translate("VentasC", "Nueva fila"))
+        item = self.tableWidget.verticalHeaderItem(13)
+        item.setText(_translate("VentasC", "Nueva fila"))
+        item = self.tableWidget.verticalHeaderItem(14)
+        item.setText(_translate("VentasC", "New Row"))
+        item = self.tableWidget.verticalHeaderItem(15)
+        item.setText(_translate("VentasC", "New Row"))
+        item = self.tableWidget.horizontalHeaderItem(0)
+        item.setText(_translate("VentasC", "Código"))
+        item = self.tableWidget.horizontalHeaderItem(1)
+        item.setText(_translate("VentasC", "Producto"))
+        item = self.tableWidget.horizontalHeaderItem(2)
+        item.setText(_translate("VentasC", "Marca"))
+        item = self.tableWidget.horizontalHeaderItem(3)
+        item.setText(_translate("VentasC", "Categoria"))
+        item = self.tableWidget.horizontalHeaderItem(4)
+        item.setText(_translate("VentasC", "Cantidad"))
+        item = self.tableWidget.horizontalHeaderItem(5)
+        item.setText(_translate("VentasC", "Precio"))
+        item = self.tableWidget.horizontalHeaderItem(6)
+        item.setText(_translate("VentasC", "Total"))
+        self.label_10.setText(_translate("VentasC", "Nombre y apellido:"))
+        self.LabelSubtotal.setText(_translate("VentasC", "$"))
+        self.label_9.setText(_translate("VentasC", "Teléfono:"))
+        self.label_12.setText(_translate("VentasC", "Metodo de Pago"))
+        self.BtnGenerarVenta.setText(_translate("VentasC", "Generar Venta"))
+        self.label_14.setText(_translate("VentasC", "Subtotal"))
+        self.label_31.setText(_translate("VentasC", "Cliente"))
+        self.label_4.setText(_translate("VentasC", "Cedula de Ciudadania:"))
+        self.label_11.setText(_translate("VentasC", "Dirección:"))
+        self.label_13.setText(_translate("VentasC", "Pago"))
+        self.LabelTotal.setText(_translate("VentasC", "$"))
+        self.label_15.setText(_translate("VentasC", "Total"))

@@ -13,6 +13,7 @@ from app.view import (
     CrediFactura_View,
     VentasA_View,
     VentasB_View,
+    VentasC_View,
     Caja_View,
     Egreso_View,
     Productos_View,
@@ -53,6 +54,9 @@ class MainApp(QWidget):
         self.ventasA = VentasA_View()
         self.ventasB = VentasB_View()
         #self.ventasCredito = VentasCredito_View()
+
+        self.ventasC = VentasC_View()
+        self.ventasCredito = VentasCredito_View()
         self.facturas = Facturas_View()
         self.egreso = Egreso_View()
         self.productos = Productos_View()
@@ -66,7 +70,9 @@ class MainApp(QWidget):
         self.stacked_widget.addWidget(self.caja)  # Índice 4
         self.stacked_widget.addWidget(self.ventasA)  # Índice 0
         self.stacked_widget.addWidget(self.ventasB)  # Índice 1
+
         #self.stacked_widget.addWidget(self.ventasCredito)  # Índice 1
+        self.stacked_widget.addWidget(self.ventasC)  # Índice 1
         self.stacked_widget.addWidget(self.facturas)  # Índice 2
         # self.stacked_widget.addWidget(self.crediFactura)  # Índice 3
         self.stacked_widget.addWidget(self.egreso)  # Índice 5
@@ -112,8 +118,20 @@ class MainApp(QWidget):
         self.ventasA.cambiar_a_ventanab.connect(
             lambda: self.stacked_widget.setCurrentWidget(self.ventasB)
         )
+        self.ventasA.cambiar_a_ventanac.connect(
+            lambda: self.stacked_widget.setCurrentWidget(self.ventasC)
+        )
         self.ventasB.cambiar_a_ventanaA.connect(
             lambda: self.stacked_widget.setCurrentWidget(self.ventasA)
+        )
+        self.ventasB.cambiar_a_ventanaC.connect(
+            lambda: self.stacked_widget.setCurrentWidget(self.ventasC)
+        )
+        self.ventasC.cambiar_a_ventanaA.connect(
+            lambda: self.stacked_widget.setCurrentWidget(self.ventasA)
+        )
+        self.ventasC.cambiar_a_ventanaB.connect(
+            lambda: self.stacked_widget.setCurrentWidget(self.ventasB)
         )
         self.navbar.BtnClientes.clicked.connect(
             lambda: self.stacked_widget.setCurrentWidget(self.Clientes)
@@ -137,6 +155,14 @@ class MainApp(QWidget):
         try:
             self.stacked_widget.setCurrentWidget(self.ventasB)
             self.ventasB.cargar_información(factura_completa)
+
+        except Exception as e:
+            print(f"Error al cargar datos VentasB: {e}")
+    
+    def cambiar_a_ventasC(self, factura_completa):
+        try:
+            self.stacked_widget.setCurrentWidget(self.ventasC)
+            self.ventasC.cargar_información(factura_completa)
 
         except Exception as e:
             print(f"Error al cargar datos VentasB: {e}")
