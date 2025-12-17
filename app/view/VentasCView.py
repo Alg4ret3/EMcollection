@@ -18,7 +18,7 @@ from ..controllers.tipo_ingreso_crud import *
 from ..controllers.clientes_crud import *
 from ..controllers.ingresos_crud import *
 from ..controllers.historial_modificacion_crud import *
-from ..ui import Ui_VentasA
+from ..ui import Ui_VentasC
 from ..utils.autocomplementado import configurar_autocompletado
 from PyQt5.QtCore import Qt
 
@@ -32,8 +32,9 @@ import win32ui
 import win32con
 import datetime
 
-class VentasC_View(QWidget, Ui_VentasA):
-    cambiar_a_ventanab = pyqtSignal()
+class VentasC_View(QWidget, Ui_VentasC):
+    cambiar_a_ventanaA = pyqtSignal()
+    cambiar_a_ventanaB = pyqtSignal()
     
     def __init__(self, parent=None):
         super(VentasC_View, self).__init__(parent)
@@ -58,7 +59,7 @@ class VentasC_View(QWidget, Ui_VentasA):
         self.InputNombreCli.setPlaceholderText("Ej: Pepito Perez")
         self.InputTelefonoCli.setPlaceholderText("Ej: 3170065430")
         self.InputDireccion.setPlaceholderText("Ej: Calle 1, 123 - Piso 1")
-        self.BtnFacturaA.setStyleSheet("""
+        self.BtnFacturaC.setStyleSheet("""
             QPushButton {
                 background-color: red; 
             }
@@ -88,7 +89,8 @@ class VentasC_View(QWidget, Ui_VentasA):
         configurar_autocompletado(self.InputNombreCli, obtener_cliente_nombre_apellido, "NombreCompleto", self.db, self.insertar_cliente)
 
         # Conexiones de señales - Botones y tabla
-        self.BtnFacturaB.clicked.connect(self.cambiar_a_ventanab)
+        self.BtnFacturaA.clicked.connect(self.cambiar_a_ventanaA)
+        self.BtnFacturaB.clicked.connect(self.cambiar_a_ventanaB)
         self.BtnGenerarVenta.clicked.connect(self.generar_venta)
         self.BtnEliminar.clicked.connect(self.eliminar_fila)
         self.tableWidget.cellClicked.connect(self.cargar_datos)

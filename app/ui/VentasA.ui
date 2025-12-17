@@ -483,7 +483,7 @@ QPushButton:hover {
 }</string>
                  </property>
                  <property name="text">
-                  <string>Factura A</string>
+                  <string>Detal</string>
                  </property>
                 </widget>
                </item>
@@ -512,7 +512,7 @@ QPushButton:hover {
 }</string>
                  </property>
                  <property name="text">
-                  <string>Factura B</string>
+                  <string>Reventa</string>
                  </property>
                 </widget>
                </item>
@@ -541,7 +541,7 @@ QPushButton:hover {
 }</string>
                  </property>
                  <property name="text">
-                  <string>Factura C</string>
+                  <string>Al por Mayor</string>
                  </property>
                 </widget>
                </item>

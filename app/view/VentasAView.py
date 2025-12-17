@@ -34,6 +34,7 @@ import datetime
 
 class VentasA_View(QWidget, Ui_VentasA):
     cambiar_a_ventanab = pyqtSignal()
+    cambiar_a_ventanac = pyqtSignal()
     
     def __init__(self, parent=None):
         super(VentasA_View, self).__init__(parent)
@@ -89,6 +90,7 @@ class VentasA_View(QWidget, Ui_VentasA):
 
         # Conexiones de señales - Botones y tabla
         self.BtnFacturaB.clicked.connect(self.cambiar_a_ventanab)
+        self.BtnFacturaC.clicked.connect(self.cambiar_a_ventanac)
         self.BtnGenerarVenta.clicked.connect(self.generar_venta)
         self.BtnEliminar.clicked.connect(self.eliminar_fila)
         self.tableWidget.cellClicked.connect(self.cargar_datos)

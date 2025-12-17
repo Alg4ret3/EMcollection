@@ -38,11 +38,11 @@ import datetime  # Asegúrate de importar el módulo 'time'
 class VentasB_View(QWidget, Ui_VentasB):
     
     cambiar_a_ventanaA = pyqtSignal()
+    cambiar_a_ventanaC = pyqtSignal()
     
     def __init__(self, parent=None):
         super(VentasB_View, self).__init__(parent)
         self.setupUi(self)
-        self.BtnFacturaA.clicked.connect(self.cambiar_a_ventanaA)
         self.BtnFacturaA.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         
         # Configuración inicial
@@ -94,6 +94,8 @@ class VentasB_View(QWidget, Ui_VentasB):
         self.InputDomicilio.setPlaceholderText("Ej: 5000")
         
         # Conexiones de señales - Botones y tabla
+        self.BtnFacturaA.clicked.connect(self.cambiar_a_ventanaA)
+        self.BtnFacturaC.clicked.connect(self.cambiar_a_ventanaC)
         self.BtnEliminar.clicked.connect(self.eliminar_fila)
         self.TablaVentaMayor.cellClicked.connect(self.cargar_datos)
         self.TablaVentaMayor.itemChanged.connect(self.actualizar_total)
