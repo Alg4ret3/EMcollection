@@ -15,7 +15,11 @@ def configurar_autocompletado(
         db_session (Session): Sesión activa de la base de datos.
     """
     # Obtener datos desde la base de datos
-    items = [getattr(item, columna) for item in obtener_datos_func(db_session)]
+    datos = obtener_datos_func(db_session)
+    if datos is None:
+        datos = []  # Garantizar que siempre sea iterable
+
+    items = [getattr(item, columna) for item in datos]
 
     # Configurar el autocompletado
     completer = QCompleter(items)

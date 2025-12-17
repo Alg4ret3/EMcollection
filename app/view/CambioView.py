@@ -42,7 +42,15 @@ class Cambio_View(QWidget, Ui_Cambio):
         self.BtnCambio.clicked.connect(self.confirmar_cambio)
 
         self.InputDevuelto.setFocus()
+        
+    def showEvent(self, event):
+        super().showEvent(event)
+        self.limpiar()
 
+    def hideEvent(self, event):
+        super().hideEvent(event)
+        self.limpiar()
+    
     # =========================
     # Autocompletado
     # =========================
@@ -72,14 +80,21 @@ class Cambio_View(QWidget, Ui_Cambio):
         nombre = input_widget.text().strip()
         if not nombre:
             setattr(self, attr_name, None)
+            input_widget.clear()
+            self.actualizar_precios()
+            self.calcular_diferencia()
             return
+
         productos = buscar_productos(self.db, nombre)
         producto_exacto = next((p for p in productos if p.Nombre.lower() == nombre.lower()), None)
         if not producto_exacto:
             QMessageBox.warning(self, "Error", f"No se encontró el producto: {nombre}")
             setattr(self, attr_name, None)
             input_widget.clear()
+            self.actualizar_precios()
+            self.calcular_diferencia()
             return
+
         setattr(self, attr_name, producto_exacto)
         self.actualizar_precios()
         self.calcular_diferencia()
@@ -91,8 +106,14 @@ class Cambio_View(QWidget, Ui_Cambio):
         tipo = self.ComboPrecios.currentText()
         if getattr(self, "producto_devuelto", None):
             self.InputPrecioDevuelto.setText(str(self.obtener_precio_por_tipo(self.producto_devuelto, tipo)))
+        else:
+            self.InputPrecioDevuelto.clear()
+
         if getattr(self, "producto_cambio", None):
             self.InputPrecioCambio.setText(str(self.obtener_precio_por_tipo(self.producto_cambio, tipo)))
+        else:
+            self.InputPrecioCambio.clear()
+
         self.calcular_diferencia()
 
     def obtener_precio_por_tipo(self, producto, tipo):
@@ -188,7 +209,6 @@ class Cambio_View(QWidget, Ui_Cambio):
                 stock_actual=self.producto_cambio.Stock_actual - cambio_valor
             )
 
-
             QMessageBox.information(self, "Éxito", "Cambio realizado correctamente")
             self.limpiar()
 
@@ -208,4 +228,6 @@ class Cambio_View(QWidget, Ui_Cambio):
         self.SpinDevuelto.setValue(1)
         self.SpinCambio.setValue(1)
         self.BtnCambio.setEnabled(True)
+        self.producto_devuelto = None
+        self.producto_cambio = None
         self.InputDevuelto.setFocus()

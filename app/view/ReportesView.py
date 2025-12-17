@@ -7,7 +7,7 @@ from..controllers.tipo_pago_crud import *
 from ..controllers.metodo_pago_crud import *
 from ..controllers.pago_credito_crud import *
 from ..controllers.venta_credito_crud import *
-from ..controllers.producto_crud import * 
+from ..controllers.producto_crud import *
 from ..controllers.ingresos_crud import *
 from ..controllers.egresos_crud import *
 from ..controllers.facturas_crud import obtener_reporte_facturas
@@ -309,6 +309,8 @@ class Reportes_View(QWidget, Ui_Reportes):
             db.close()
 
     def generar_pdf(self):
+        
+        from app.controllers.producto_crud import obtener_productos_mas_vendidos
         # Obtener el tipo de productos seleccionado en el ComboBox
         tipo_seleccionado = self.TipoProductosComboBox.currentText()  # Obtener el valor del ComboBox
         
