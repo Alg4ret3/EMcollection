@@ -279,8 +279,6 @@ class VentasB_View(QWidget, Ui_VentasB):
                     QMessageBox.warning(self, "Error", "El monto pagado no puede ser mayor al subtotal.")
                     return
 
-            self.verificar_cliente(client_id, client_name, client_address, client_phone)
-
             db = SessionLocal()
             cantidad_total_articulos = 0
 
@@ -306,8 +304,12 @@ class VentasB_View(QWidget, Ui_VentasB):
                 items.append((description, quantity, precio_unitario, value))
                 produc_datos.append((codigo, quantity, precio_unitario))
                 
-            if cantidad_total_articulos < 6:
-                QMessageBox.warning(self, "Error", f"El minimo para realizar la venta es 6 unidades.")
+            cliente_existente = self.cliente_existe()
+            
+            if cliente_existente==False and cantidad_total_articulos >= 6:
+                self.verificar_cliente(client_id, client_name, client_address, client_phone)
+            elif cliente_existente==False and cantidad_total_articulos < 6:
+                QMessageBox.warning(self, "Error", f"El cliente no existe y no puede comprar menos de 6 articulos.")
                 return
 
             # Calcular totales
@@ -598,16 +600,16 @@ class VentasB_View(QWidget, Ui_VentasB):
                     print(f"Error al procesar el nombre del cliente: {e}")
                     return
                 # Crear un nuevo cliente si no existe 
-                # nuevo_cliente = crear_cliente( 
-                #     db=db, 
-                #     id_cliente=cedula, 
-                #     nombre=nombre, 
-                #     apellido=apellido, 
-                #     direccion=direccion, 
-                #     telefono=telefono, 
-                # ) 
-                # if nuevo_cliente:
-                #     QMessageBox.information(self, "Cliente creado", "El cliente ha sido creado exitosamente") 
+                nuevo_cliente = crear_cliente( 
+                    db=db, 
+                    id_cliente=cedula, 
+                    nombre=nombre, 
+                    apellido=apellido, 
+                    direccion=direccion, 
+                    telefono=telefono, 
+                ) 
+                if nuevo_cliente:
+                    QMessageBox.information(self, "Cliente creado", "El cliente ha sido creado exitosamente") 
  
         except Exception as e: 
             QMessageBox.critical(self, "Error", f"Error al procesar el cliente: {str(e)}") 
@@ -1299,6 +1301,23 @@ class VentasB_View(QWidget, Ui_VentasB):
                 self.InputDireccion.setText(cliente.Direccion)
             else:
                 QMessageBox.warning(self, "Error", f"Cliente con cédula {id_cliente} no encontrado.")
+        except Exception as e:
+            print(f"Error al obtener cliente: {e}")
+        finally:
+            self.db.close()
+            
+    def cliente_existe(self):
+
+        # Obtener cliente
+        id_cliente = int(self.InputCedula.text().strip())
+        self.db = SessionLocal()
+        
+        try:
+            cliente = obtener_cliente_por_id(self.db, id_cliente)
+            if cliente:
+                return True
+            else:
+                return False
         except Exception as e:
             print(f"Error al obtener cliente: {e}")
         finally:
