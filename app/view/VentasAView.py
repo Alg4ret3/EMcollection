@@ -273,7 +273,11 @@ class VentasA_View(QWidget, Ui_VentasA):
                     QMessageBox.warning(self, "Error", "El monto pagado no puede ser mayor al subtotal.")
                     return
 
-            self.verificar_cliente(client_id, client_name, client_address, client_phone)
+            verificar_cliente = self.verificar_cliente(client_id, client_name, client_address, client_phone)
+            
+            if not verificar_cliente:
+                QMessageBox.information(self, "Nuevo Cliente", f"El cliente con cédula {client_id} no existe. creelo o use por defecto el id (111)")
+                return
 
             db = SessionLocal()
             
@@ -588,17 +592,11 @@ class VentasA_View(QWidget, Ui_VentasA):
                 except Exception as e:
                     print(f"Error al procesar el nombre del cliente: {e}")
                     return
-                # Crear un nuevo cliente si no existe 
-                # nuevo_cliente = crear_cliente( 
-                #     db=db, 
-                #     id_cliente=cedula, 
-                #     nombre=nombre, 
-                #     apellido=apellido, 
-                #     direccion=direccion, 
-                #     telefono=telefono, 
-                # ) 
-                # if nuevo_cliente:
-                #     QMessageBox.information(self, "Cliente creado", "El cliente ha sido creado exitosamente") 
+                
+                return False
+            else:
+                return True
+                
  
         except Exception as e: 
             QMessageBox.critical(self, "Error", f"Error al procesar el cliente: {str(e)}") 
