@@ -51,9 +51,9 @@ def poblar_datos_prueba():
 
     try:
         print("creando Tipo Facturas")
-        crear_tipo_factura(db, "Factura A")
-        crear_tipo_factura(db, "Factura B")
-        crear_tipo_factura(db, "Credito")
+        crear_tipo_factura(db, "Detal")
+        crear_tipo_factura(db, "Reventa")
+        crear_tipo_factura(db, "Mayorista")
         print("Tipo Facturas creados exitosamente.")
     except Exception as e:
         print(f"Error al crear Tipo Facturas: {e}")

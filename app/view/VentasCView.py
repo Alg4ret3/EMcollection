@@ -643,7 +643,7 @@ class VentasC_View(QWidget, Ui_VentasC):
                 descuento=descuento,
                 estado=estado,
                 id_metodo_pago=id_metodo_pago.ID_Metodo_Pago,
-                id_tipo_factura=1,
+                id_tipo_factura=3,
                 id_cliente=client_id,
                 id_usuario=id_usuario,
                 domicilio=domicilio,
