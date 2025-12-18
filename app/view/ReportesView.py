@@ -44,7 +44,7 @@ class Reportes_View(QWidget, Ui_Reportes):
         self.TipoCajaComboBox.addItems(["Ingresos", "Egresos"])
         self.TiempoCajaComboBox.addItems(["Diario", "Intervalo de días"])
         self.TipoProductosComboBox.addItems(["Bajo Stock", "Más  Vendidos - Menos Vendidos", "Inactivos"])
-        self.ReporteAnalisisComboBox.addItems(["Comparación Financiera", "Análisis de crédito"])
+        self.ReporteAnalisisComboBox.addItems(["Comparación Financiera"])
         self.ReporteAnalisisComboBox.currentIndexChanged.connect(self.cambiar_estado)   #cambiar estado de combobox y calendario
         self.TiempoAnalisisComboBox.addItems(["Diario", "Intervalo de días"])
 

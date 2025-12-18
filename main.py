@@ -30,7 +30,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
 
         self.usuario_actual_id = None
-        self.setWindowTitle("Systock")
+        self.setWindowTitle("EM collection - Sistema de Gestión de Ventas y Stock")
         self.setWindowIcon(QIcon("assets/logo1.ico"))
         self.inicializar_db()
         self.resize(800, 600)
@@ -215,6 +215,7 @@ class MainWindow(QMainWindow):
             navbar.BtnFacturas.setEnabled(True)
             navbar.BtnReportes.setEnabled(True)
             navbar.BtnControlUsuario.setEnabled(True)
+            navbar.BtnClientes.setEnabled(True)
         elif rol == "ASESOR":
             navbar.BtnVentas.setEnabled(True)
             navbar.BtnCaja.setEnabled(True)
@@ -226,6 +227,7 @@ class MainWindow(QMainWindow):
             navbar.BtnFacturas.setEnabled(True)
             navbar.BtnReportes.setEnabled(False)
             navbar.BtnControlUsuario.setEnabled(False)
+            navbar.BtnClientes.setEnabled(False)
 
 
 if __name__ == "__main__":
