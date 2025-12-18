@@ -274,7 +274,6 @@ class VentasC_View(QWidget, Ui_VentasC):
                     return
 
             db = SessionLocal()
-            cantidad_total_articulos = 0
             
             # Obtener los artículos de la tabla
             produc_datos = []
@@ -283,11 +282,14 @@ class VentasC_View(QWidget, Ui_VentasC):
                 codigo = self.tableWidget.item(row, 0).text()
                 description = self.tableWidget.item(row, 1).text()
                 quantity = int(self.tableWidget.item(row, 4).text())
-                cantidad_total_articulos += quantity
                 precio_unitario = float(self.tableWidget.item(row, 5).text())
                 value = float(self.tableWidget.item(row, 6).text())
 
                 producto = obtener_producto_por_id(db, int(codigo))
+                
+                if quantity < 12:
+                    QMessageBox.warning(self, "Error", f"El cliente no puede comprar menos de 12 unidades.")
+                    return
 
                 if not producto:
                     QMessageBox.warning(self, "Error", f"Producto con código {codigo} no encontrado.")
@@ -299,13 +301,11 @@ class VentasC_View(QWidget, Ui_VentasC):
                 produc_datos.append((codigo, quantity, precio_unitario))
                 
             cliente_existente = self.cliente_existe()
-
-            if cliente_existente==False and cantidad_total_articulos >= 12:
-                self.verificar_cliente(client_id, client_name, client_address, client_phone)
-            elif cliente_existente==False and cantidad_total_articulos < 12:
-                QMessageBox.warning(self, "Error", f"El cliente no existe y no puede comprar menos de 12 unidades.")
-                return
             
+            if not cliente_existente:
+                QMessageBox.information(self, "Nuevo Cliente", f"El cliente con cédula {client_id} no existe. creelo o use por defecto el id (111)")
+                return
+
                     
             # Calcular totales
             subtotal = sum(item[3] for item in items)
