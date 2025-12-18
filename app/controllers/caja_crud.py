@@ -113,6 +113,13 @@ def obtener_caja_por_id(db: Session, id_caja: int):
     """
     return db.query(Caja).filter(Caja.ID_Caja == id_caja).first()
 
+def buscar_caja_abierta(db: Session):
+    """
+    Obtiene un registro de caja abierta.
+    :param db: Sesión de base de datos.
+    :return: Objeto Caja o None si no existe.
+    """
+    return db.query(Caja).filter(Caja.Estado == True).first()
 
 # Actualizar un registro de caja
 def actualizar_caja(

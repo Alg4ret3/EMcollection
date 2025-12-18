@@ -20,6 +20,7 @@ from ..controllers.ingresos_crud import *
 from ..controllers.historial_modificacion_crud import *
 from ..ui import Ui_VentasC
 from ..utils.autocomplementado import configurar_autocompletado
+from ..utils.buscarCajaAbierta import buscar_cajas_abierta
 from PyQt5.QtCore import Qt
 
 
@@ -208,6 +209,10 @@ class VentasC_View(QWidget, Ui_VentasC):
         msg_box.exec_()
         
     def generar_venta(self):
+        caja = buscar_cajas_abierta(self.db)
+        if not caja:
+            QMessageBox.warning(self, "Error", "No hay caja abierta. Por favor, abre una nueva para generar la factura.")
+            return
         
         if self.tableWidget.rowCount() == 0:
             QMessageBox.warning(self, "Error", "No hay productos en la venta.")
