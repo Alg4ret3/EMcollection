@@ -240,6 +240,12 @@ class VentasC_View(QWidget, Ui_VentasC):
                 QMessageBox.warning(self, "Datos incompletos", "El campo 'Cédula' está vacío.")
                 self.InputCedula.setFocus()
                 return
+            if len(client_id) < 6 or len(client_id) > 11 or not client_id.isdigit():
+                QMessageBox.warning(
+                    self, "Cédula inválida", "La cédula debe tener entre 6 y 11 dígitos."
+                )
+                QTimer.singleShot(0, self.InputCedula.setFocus)
+                return
             if not client_address:
                 QMessageBox.warning(self, "Datos incompletos", "El campo 'Dirección' está vacío.")
                 self.InputDireccion.setFocus()
@@ -300,11 +306,8 @@ class VentasC_View(QWidget, Ui_VentasC):
                 items.append((description, quantity, precio_unitario, value))
                 produc_datos.append((codigo, quantity, precio_unitario))
                 
-            cliente_existente = self.cliente_existe()
             
-            if not cliente_existente:
-                QMessageBox.information(self, "Nuevo Cliente", f"El cliente con cédula {client_id} no existe. creelo o use por defecto el id (111)")
-                return
+            self.verificar_cliente(client_id, client_name, client_address, client_phone)
 
                     
             # Calcular totales
