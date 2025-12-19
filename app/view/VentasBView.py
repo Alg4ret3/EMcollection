@@ -247,6 +247,12 @@ class VentasB_View(QWidget, Ui_VentasB):
                 QMessageBox.warning(self, "Datos incompletos", "El campo 'Cédula' está vacío.")
                 self.InputCedula.setFocus()
                 return
+            if len(client_id) < 6 or len(client_id) > 11 or not client_id.isdigit():
+                QMessageBox.warning(
+                    self, "Cédula inválida", "La cédula debe tener entre 6 y 11 dígitos."
+                )
+                QTimer.singleShot(0, self.InputCedula.setFocus)
+                return
             if not client_address:
                 QMessageBox.warning(self, "Datos incompletos", "El campo 'Dirección' está vacío.")
                 self.InputDireccion.setFocus()
