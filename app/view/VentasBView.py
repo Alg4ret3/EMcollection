@@ -1,5 +1,5 @@
 # PyQt5 imports
-from PyQt5.QtWidgets import QMessageBox, QWidget, QTableWidgetItem
+from PyQt5.QtWidgets import QMessageBox, QWidget, QTableWidgetItem, QAbstractItemView
 from PyQt5.QtCore import QRegularExpression, QTimer, QUrl
 from PyQt5.QtGui import QRegularExpressionValidator
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
@@ -45,6 +45,7 @@ class VentasB_View(QWidget, Ui_VentasB):
         super(VentasB_View, self).__init__(parent)
         self.setupUi(self)
         self.BtnFacturaA.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.TablaVentaMayor.setEditTriggers(QAbstractItemView.NoEditTriggers)
         
         # Configuración inicial
         self.player = QMediaPlayer()
