@@ -22,8 +22,6 @@ from app.view import (
     Cliente_View,
     #Cambio_View,
 )
-
-
 class MainApp(QWidget):
     def __init__(self, parent=None):
         super(MainApp, self).__init__(parent)
@@ -144,6 +142,7 @@ class MainApp(QWidget):
         
         self.facturas.enviar_facturas_A.connect(self.cambiar_a_ventasA)
         self.facturas.enviar_facturas_B.connect(self.cambiar_a_ventasB)
+        self.facturas.enviar_facturas_C.connect(self.cambiar_a_ventasC)
         #self.facturas.enviar_facturas_Credito.connect(self.cambiar_a_ventasCredito)
         #self.crediFactura.enviar_facturas_Credito.connect(self.cambiar_a_ventasCredito)
         #self.crediFactura.enviar_ventaCredito.connect(self.cambiar_a_pagoCredito)
