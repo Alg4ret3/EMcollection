@@ -37,10 +37,10 @@ class Facturas_View(QWidget, Ui_Facturas):
         self.TablaFacturas.setColumnWidth(6, 120)
 
 
-        self.BtnEliminarFactura.clicked.connect(self.eliminar_factura)
+        #self.BtnEliminarFactura.clicked.connect(self.eliminar_factura)
         self.BtnGenerarTicket.clicked.connect(self.generar_ticket)
         self.BtnFacturaPagada.clicked.connect(self.factura_pagada)
-        self.BtnEditarFactura.clicked.connect(self.editar_factura)
+        #self.BtnEditarFactura.clicked.connect(self.editar_factura)
         self.BtnVerCancelarVenta.clicked.connect(self.cancelar_venta)
 
     def showEvent(self, event):
@@ -241,102 +241,67 @@ class Facturas_View(QWidget, Ui_Facturas):
         self.db.close()
 
     def generar_ticket(self):
-        """
-        Genera un ticket de venta para la factura seleccionada.
-        """
         ids = self.obtener_ids_seleccionados()
 
         if not ids:
-            enviar_notificacion(
-                "Advertencia", "No se seleccionaron facturas para generar ticket."
-            )
+            QMessageBox.warning(self, "Advertencia", "No se seleccionaron facturas.")
             return
-        for id_factura in ids:
-            facturas = obtener_factura_por_id(self.db, id_factura)
-            
-            if facturas.tipofactura == "Credito":
-                QMessageBox.warning(self, "Factura", f"La factura {id_factura} no es una factura de venta.")
-                return
 
         db = SessionLocal()
+        try:
+            factura_completa = obtener_factura_completa(db, ids[0])
 
-        # Obtener la factura completa
-        factura_completa = obtener_factura_completa(db, ids[0])
+            if not factura_completa:
+                QMessageBox.warning(self, "Error", "Factura no encontrada.")
+                return
 
-        if not factura_completa:
-            print(f"No se encontró la factura con ID {ids[0]}")
-            return
-        # Extraer los datos de la factura
-        factura = factura_completa["Factura"]
-        cliente = factura_completa["Cliente"]  # Acceder al primer elemento de la lista
-        detalles = factura_completa["Detalles"]
+            factura = factura_completa["Factura"]
+            cliente = factura_completa["Cliente"]
+            detalles = factura_completa["Detalles"]
 
-        # Calcular subtotal y descuento
-        subtotal = sum(detalle["Subtotal"] for detalle in detalles)
-        delivery_fee = factura["Descuento"]
+            subtotal = sum(d["Subtotal"] for d in detalles)
+            descuento = factura["Descuento"]
+            total = subtotal - descuento
 
-        # Extraer información necesaria para el ticket
-        client_name = f"{cliente['Nombre']} {cliente['Apellido']}"
-        client_id = cliente["ID_Cliente"]
-        client_address = cliente["Direccion"]
-        client_phone = cliente["Teléfono"]
-        items = [
-            {
-                "quantity": detalle["Cantidad"],
-                "name": detalle.get(
-                    "Producto", "Producto sin nombre"
-                ),  # Asegúrate de incluir el nombre del producto en la consulta
-                "unit_price": (
-                    float(detalle["Precio_Unitario"])
-                    if isinstance(detalle["Precio_Unitario"], (int, float))
-                    else 0.0
-                ),
-            }
-            for detalle in detalles
-        ]
+            # 🧾 TEXTO TIPO TICKET
+            texto = f"""
+    ════════════════════════════
+            TICKET DE VENTA
+    ════════════════════════════
+    Factura #: {factura['ID_Factura']}
+    Fecha   : {factura['Fecha_Factura']}
 
-        items2 = []
-        for item in items:
-            quantity = item["quantity"]
-            description = item["name"]
-            value = float(item["unit_price"])
+    Cliente : {cliente['Nombre']} {cliente['Apellido']}
+    Tel     : {cliente['Teléfono']}
+    Dirección:
+    {cliente['Direccion']}
+    ────────────────────────────
+    ITEM                TOTAL
+    ────────────────────────────
+    """
 
-            items2.append((quantity, description, value))
+            for d in detalles:
+                producto = d['Producto'][:16]  # corta para alinear
+                texto += f"{producto:<16} x{d['Cantidad']:<2} ${d['Subtotal']:>8,.2f}\n"
 
-        # Calcular el total
-        total = subtotal - delivery_fee
+            texto += f"""
+    ────────────────────────────
+    Subtotal        ${subtotal:>10,.2f}
+    Descuento       ${descuento:>10,.2f}
+    ────────────────────────────
+    TOTAL           ${total:>10,.2f}
+    ────────────────────────────
+    Pago: {factura['MetodoPago']}
+    ════════════════════════════
+        ¡GRACIAS POR SU COMPRA!
+    ════════════════════════════
+    """
 
-        # Extraer información adicional de la factura
-        payment_method = factura["MetodoPago"]
-        invoice_number = factura["ID_Factura"]
+            QMessageBox.information(self, "🧾 Ticket de Venta", texto)
 
-        if payment_method == "Efectivo":
-            pago = f"{factura["Monto_efectivo"]}"
-        elif payment_method == "Transferencia":
-            pago = f"{factura["Monto_TRANSACCION"]}"
-        else:
-            pago = f"{factura['Monto_efectivo']}/{factura['Monto_TRANSACCION']}"
+        finally:
+            db.close()
 
-        pan = "123456789"  # Número fijo de ejemplo, cámbialo si es necesario
-
-        bandera = generate_ticket(
-            client_name=client_name,
-            client_id=client_id,
-            client_address=client_address,
-            client_phone=client_phone,
-            items=items2,
-            subtotal=subtotal,
-            delivery_fee=delivery_fee,
-            total=total,
-            payment_method=payment_method,
-            invoice_number=invoice_number,
-            pan=pan,
-            pago=pago,
-            filename=None,  # Puedes cambiar esto según tu necesidad
-        )
-
-        if bandera:
-            QMessageBox.warning(self, "Ticket", f"Factura generada exitosamente.")
 
     def factura_pagada(self):
         """

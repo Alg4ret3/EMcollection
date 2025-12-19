@@ -16,6 +16,7 @@ from ..controllers.egresos_crud import *
 from ..controllers.ingresos_crud import *
 from ..controllers.caja_crud import *
 from ..utils.validar_campos import *
+from ..controllers.facturas_crud import existen_facturas_pendientes
 from PyQt5.QtGui import QColor 
 from PyQt5.QtWidgets import QMessageBox  
 class Caja_View(QWidget, Ui_Caja):
@@ -292,6 +293,18 @@ class Caja_View(QWidget, Ui_Caja):
         self.InputMontoCaja.clear()     
         
     def cerrar_caja(self):
+            
+        self.db = SessionLocal()
+        try:
+            if existen_facturas_pendientes(self.db):
+                QMessageBox.warning(
+                    self,
+                    "Caja no se puede cerrar",
+                    "Existen facturas pendientes.\nDebe finalizar o cancelar todas las facturas antes de cerrar la caja."
+                )
+                return
+        finally:
+            self.db.close()
         
         count = 0
         for row in range(self.TablaCaja.rowCount()):    

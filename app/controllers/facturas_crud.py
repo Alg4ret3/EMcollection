@@ -348,3 +348,6 @@ def eliminar_factura(db: Session, id_factura: int):
     db.delete(factura_existente)
     db.commit()
     return True
+
+def existen_facturas_pendientes(db: Session):
+    return db.query(Facturas).filter(Facturas.Estado == False).first() is not None
