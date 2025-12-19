@@ -67,10 +67,10 @@ def generate_ticket(
 
         # Encabezado del ticket (solo se dibuja en la primera página)
         pdf.setFont("Helvetica-Bold", 22)
-        pdf.drawCentredString(pdf_width / 2, pdf_height - 30, "Lady NailShop")
+        pdf.drawCentredString(pdf_width / 2, pdf_height - 30, "EM Collection")
         pdf.drawCentredString(pdf_width / 2, pdf_height - 60, "Pasto, Colombia")
         pdf.drawCentredString(
-            pdf_width / 2, pdf_height - 90, "Teléfono: +57 316 144 4474"
+            pdf_width / 2, pdf_height - 90, "+57 312-768-91-51"
         )
         pdf.drawCentredString(
             pdf_width / 2,

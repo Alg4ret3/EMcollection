@@ -76,7 +76,7 @@ class VentasB_View(QWidget, Ui_VentasB):
         # self.InputDescuentoB.textChanged.connect(self.aplicar_descuento)
         self.MetodoPagoBox.currentIndexChanged.connect(self.configuracion_pago)
         configurar_autocompletado(self.InputNombre, obtener_productos, "Nombre", self.db, self.procesar_codigo)
-        configurar_autocompletado(self.InputNombreCli, obtener_cliente_nombre_apellido, "NombreCompleto", self.db, self.insertar_cliente)
+        #configurar_autocompletado(self.InputNombreCli, obtener_cliente_nombre_apellido, "NombreCompleto", self.db, self.insertar_cliente)
         
         #placeholder
         self.InputPago.setPlaceholderText("$")
@@ -114,7 +114,7 @@ class VentasB_View(QWidget, Ui_VentasB):
         self.InputDomicilio.clear()
         self.limpiar_datos_cliente()
         configurar_autocompletado(self.InputNombre, obtener_productos, "Nombre", self.db, self.procesar_codigo)
-        configurar_autocompletado(self.InputNombreCli, obtener_cliente_nombre_apellido, "NombreCompleto", self.db, self.insertar_cliente)
+        #configurar_autocompletado(self.InputNombreCli, obtener_cliente_nombre_apellido, "NombreCompleto", self.db, self.insertar_cliente)
 
     def cargar_información(self, factura_completa):
         factura = factura_completa["Factura"]
@@ -259,8 +259,8 @@ class VentasB_View(QWidget, Ui_VentasB):
                 self.InputPago.setFocus()
                 return
             if payment_method == "Efectivo" or payment_method == "Transferencia":
-                if float(monto_pago) > subtotal:
-                    QMessageBox.warning(self, "Error", "El monto pagado no puede ser mayor al subtotal.")
+                if float(monto_pago) != subtotal:
+                    QMessageBox.warning(self, "Error", "El monto pagado no puede ser diferente al subtotal.")
                     return 
             elif payment_method == "Mixto":
                 if '/' in monto_pago:
@@ -275,8 +275,8 @@ class VentasB_View(QWidget, Ui_VentasB):
                     QMessageBox.warning(self, "Error", "Ingrese el monto efectivo y el monto transferencia separados por un barra (/).")
                     return
                 
-                if total > subtotal:
-                    QMessageBox.warning(self, "Error", "El monto pagado no puede ser mayor al subtotal.")
+                if total != subtotal:
+                    QMessageBox.warning(self, "Error", "El monto pagado no puede ser diferente al subtotal.")
                     return
 
             db = SessionLocal()
@@ -337,9 +337,10 @@ class VentasB_View(QWidget, Ui_VentasB):
             # Configuración inicial
             max_lines_per_page = 30  # Límite de líneas por página
             current_line = 0  # Contador de líneas
-            empresa_nombre = "LadyNailShop"
+            empresa_nombre = "EM Collection"
             empresa_direccion = "Pasto, Colombia"
-            empresa_telefono = "+57 316-144-44-74"
+            empresa_telefono = "+57 312-768-91-51"
+            empresa_local = "Cra 31B No. 19A-34"
 
             # Obtener la fecha actual
             fecha_actual = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
@@ -414,10 +415,10 @@ class VentasB_View(QWidget, Ui_VentasB):
             # Imprimir la información del cliente
 
             # Calcular y centrar texto con precisión
-            for i, linea in enumerate([empresa_nombre, empresa_direccion, empresa_telefono, fecha_actual]):
+            for i, linea in enumerate([empresa_nombre, empresa_local, empresa_direccion, empresa_telefono, fecha_actual]):
                 text_size = hDC.GetTextExtent(linea)  # (ancho, alto)
                 text_width = text_size[0]
-                hDC.TextOut(center_x - (text_width // 2), 50 + (i * line_height), linea)
+                hDC.TextOut(center_x - (text_width // 2), 10 + (i * line_height), linea)
             y += line_height
             hDC.SelectObject(font)
             
@@ -445,7 +446,7 @@ class VentasB_View(QWidget, Ui_VentasB):
             y += line_height  # Mueve la posición para empezar a imprimir los productos
             
             # Encabezado de tabla productos
-            header = "{:<18} {:>6} {:>10} {:>10}".format("Producto", "Cant.", "P.Mayor", "Total")
+            header = "{:<18} {:>6} {:>10} {:>10}".format("Producto", "Cant.", "P.Reventa", "Total")
             hDC.TextOut(x, y, header)
             y += line_height
 

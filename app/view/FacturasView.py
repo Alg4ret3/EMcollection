@@ -18,7 +18,7 @@ from ..utils.restructura_ticket import generate_ticket
 class Facturas_View(QWidget, Ui_Facturas):
     enviar_facturas_A = pyqtSignal(dict)
     enviar_facturas_B = pyqtSignal(dict)
-    enviar_facturas_Credito = pyqtSignal(dict)
+    enviar_facturas_C = pyqtSignal(dict)
 
     def __init__(self, parent=None):
         super(Facturas_View, self).__init__(parent)
@@ -408,14 +408,14 @@ class Facturas_View(QWidget, Ui_Facturas):
                 )
                 return
 
-            if factura_completa["Factura"]["TipoFactura"] == "Factura A":
+            if factura_completa["Factura"]["TipoFactura"] == "Detal":
                 self.enviar_facturas_A.emit(factura_completa)
 
-            elif factura_completa["Factura"]["TipoFactura"] == "Factura B":
+            elif factura_completa["Factura"]["TipoFactura"] == "Reventa":
                 self.enviar_facturas_B.emit(factura_completa)
 
-            elif factura_completa["Factura"]["TipoFactura"] == "Credito":
-                self.enviar_facturas_Credito.emit(factura_completa)
+            elif factura_completa["Factura"]["TipoFactura"] == "Mayorista":
+                self.enviar_facturas_C.emit(factura_completa)
 
         except Exception as e:
             print(f"Error al abrir ventana de ventas: {e}")
