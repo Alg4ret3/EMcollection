@@ -306,10 +306,12 @@ class VentasB_View(QWidget, Ui_VentasB):
                 
             cliente_existente = self.cliente_existe()
             
-            if cliente_existente==False and cantidad_total_articulos >= 6:
-                self.verificar_cliente(client_id, client_name, client_address, client_phone)
-            elif cliente_existente==False and cantidad_total_articulos < 6:
+            if cliente_existente==False and cantidad_total_articulos < 6:
                 QMessageBox.warning(self, "Error", f"El cliente no existe y no puede comprar menos de 6 articulos.")
+                return
+            
+            if not cliente_existente:
+                QMessageBox.information(self, "Nuevo Cliente", f"El cliente con cédula {client_id} no existe. creelo o use por defecto el id (111)")
                 return
 
             # Calcular totales
