@@ -281,6 +281,8 @@ class VentasC_View(QWidget, Ui_VentasC):
                     return
 
             db = SessionLocal()
+            cliente_existente =self.buscar_cliente(client_id)
+            condition_mayorista_cliente = False
             
             # Obtener los artículos de la tabla
             produc_datos = []
@@ -294,10 +296,14 @@ class VentasC_View(QWidget, Ui_VentasC):
 
                 producto = obtener_producto_por_id(db, int(codigo))
                 
-                if quantity < 12:
-                    QMessageBox.warning(self, "Error", f"El cliente no puede comprar menos de 12 unidades.")
-                    return
-
+                if cliente_existente:
+                    if quantity >= 12:
+                        condition_mayorista_cliente = True
+                else:
+                    if quantity < 12:
+                        QMessageBox.warning(self, "Error", "La cantidad minima a un cliente no registrado por producto es 12.")
+                        return
+                    
                 if not producto:
                     QMessageBox.warning(self, "Error", f"Producto con código {codigo} no encontrado.")
                     return
@@ -306,10 +312,12 @@ class VentasC_View(QWidget, Ui_VentasC):
 
                 items.append((description, quantity, precio_unitario, value))
                 produc_datos.append((codigo, quantity, precio_unitario))
-                
+
+            if condition_mayorista_cliente == False and cliente_existente:
+                QMessageBox.warning(self, "Error", "Los clientes mayoristas deben comprar al menos 12 unidades de un producto.")
+                return
             
             self.verificar_cliente(client_id, client_name, client_address, client_phone)
-
                     
             # Calcular totales
             subtotal = sum(item[3] for item in items)
@@ -613,12 +621,22 @@ class VentasC_View(QWidget, Ui_VentasC):
                 ) 
                 if nuevo_cliente:
                     QMessageBox.information(self, "Cliente creado", "El cliente ha sido creado exitosamente") 
- 
+            return cliente_existente
         except Exception as e: 
             QMessageBox.critical(self, "Error", f"Error al procesar el cliente: {str(e)}") 
         finally: 
             # Cerrar la sesión para liberar recursos 
             db.close()    
+    
+    def buscar_cliente(self, cedula):
+        db = SessionLocal()
+        try:
+            cliente = obtener_cliente_por_id(db, cedula)
+            return cliente
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Error al buscar el cliente: {str(e)}")
+        finally:
+            db.close()
         
     def guardar_factura(self, db, client_id, payment_method, items, monto_pago, descuento, id_usuario, domicilio):
     
