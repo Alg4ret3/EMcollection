@@ -829,7 +829,7 @@ QScrollBar::handle:horizontal:hover {
                  <item alignment="Qt::AlignHCenter">
                   <widget class="QLabel" name="label">
                    <property name="text">
-                    <string>Tabla de Ingresos</string>
+                    <string>Tabla de Movimientos</string>
                    </property>
                   </widget>
                  </item>
@@ -1054,7 +1054,7 @@ QScrollBar::handle:horizontal:hover {
                    </row>
                    <column>
                     <property name="text">
-                     <string>Ingresos</string>
+                     <string>id</string>
                     </property>
                     <property name="textAlignment">
                      <set>AlignCenter</set>
@@ -1062,7 +1062,7 @@ QScrollBar::handle:horizontal:hover {
                    </column>
                    <column>
                     <property name="text">
-                     <string>T.Ingreso</string>
+                     <string>Movimiento</string>
                     </property>
                     <property name="textAlignment">
                      <set>AlignCenter</set>
@@ -1102,7 +1102,7 @@ QScrollBar::handle:horizontal:hover {
                    <item row="1" column="0" alignment="Qt::AlignRight">
                     <widget class="QLabel" name="label_4">
                      <property name="text">
-                      <string>Monto Transferenica :</string>
+                      <string>Monto Transferencia :</string>
                      </property>
                     </widget>
                    </item>
