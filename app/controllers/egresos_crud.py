@@ -52,6 +52,7 @@ def obtener_egresos(db: Session):
             MetodoPago.Nombre.label("metodopago"),
         )
         .join(MetodoPago, Egresos.ID_Metodo_Pago == MetodoPago.ID_Metodo_Pago)
+        .order_by(Egresos.Fecha_Egreso.desc(), Egresos.ID_Egreso.desc())
         .all()
     )
     

@@ -249,78 +249,22 @@ class Egreso_View(QWidget, Ui_Egreso):
             return
         
         # Crear el egreso en la base de datos
-        nuevo_egreso = crear_egreso(db, tipo_gasto, descripcion_egreso, monto_egreso, metodo_pago_id)
-        
-        # Agregar la fila a la tabla
-        row_position = self.TablaEgreso.rowCount()  # Obtener la posición de la siguiente fila vacía
-        self.TablaEgreso.insertRow(row_position)  # Insertar una nueva fila
-        
-        # Asignar los valores a las celdas de la nueva fila
-        item_id_egreso = QTableWidgetItem(str(nuevo_egreso.ID_Egreso))  # ID Egreso
-        item_id_egreso.setTextAlignment(Qt.AlignCenter)  # Alineación centrada
-        self.TablaEgreso.setItem(row_position, 0, item_id_egreso)  # ID Egreso
+        crear_egreso(db, tipo_gasto, descripcion_egreso, monto_egreso, metodo_pago_id)
 
-        item_tipo_gasto = QTableWidgetItem(tipo_gasto)  # Tipo de Gasto
-        item_tipo_gasto.setTextAlignment(Qt.AlignCenter)  # Alineación centrada
-        self.TablaEgreso.setItem(row_position, 1, item_tipo_gasto)  # Tipo de Gasto
-
-        item_descripcion_egreso = QTableWidgetItem(descripcion_egreso)  # Descripción
-        item_descripcion_egreso.setTextAlignment(Qt.AlignCenter)  # Alineación centrada
-        self.TablaEgreso.setItem(row_position, 2, item_descripcion_egreso)  # Descripción
-
-        item_metodo_pago = QTableWidgetItem(metodo_pago)  # Método de Pago
-        item_metodo_pago.setTextAlignment(Qt.AlignCenter)  # Alineación centrada
-        self.TablaEgreso.setItem(row_position, 3, item_metodo_pago)  # Método de Pago
-
-        item_monto_egreso = QTableWidgetItem(str(monto_egreso))  # Monto
-        item_monto_egreso.setTextAlignment(Qt.AlignCenter)  # Alineación centrada
-        self.TablaEgreso.setItem(row_position, 4, item_monto_egreso)  # Monto
-            
-            # Crear el item de fecha
-        item_fecha_egreso = QTableWidgetItem(fecha_egreso)
-
-        # Alinear el texto al centro
-        item_fecha_egreso.setTextAlignment(Qt.AlignCenter)
-
-        # Asignar el item a la celda correspondiente
-        self.TablaEgreso.setItem(row_position, 5, item_fecha_egreso)  # Última Fec 
-        # Limpiar el formulario después de agregar el egreso
+        # Recargar la tabla para mostrar los egresos ordenados desde los más recientes
         self.limpiar_formulario()
         db.close()
-        
+        self.cargar_egresos()
         self.fecha_egreso()
     def metodo_pago(self):
         try:
-            # Iniciar conexión con la base de datos
-            db = SessionLocal()
-
-            # Verificar si la conexión fue exitosa
-            if db:
-                metodos = obtener_metodos_pago(db)
-                
-                # Obtener nombres de los métodos de pago si existen
-                if metodos:
-                    nombres_metodos = [metodo.Nombre for metodo in metodos]
-                    # Imprimir los métodos de pago encontrados
-                    print("Métodos de pago encontrados:", nombres_metodos)
-                    self.MetodoPagoBox.addItems(nombres_metodos[:2])
-                else:
-                    nombres_metodos = []
-                    print("No se encontraron métodos de pago.")
-            else:
-                nombres_metodos = []
-                print("No se pudo establecer conexión con la base de datos.")
-
-            return nombres_metodos  # Retorna los nombres de los métodos de pago
+            self.MetodoPagoBox.clear()
+            self.MetodoPagoBox.addItem("Efectivo")
+            return ["Efectivo"]
 
         except Exception as e:
-            # Manejo de errores (opcionalmente, puedes registrar errores en logs)
             print(f"Error al obtener los métodos de pago: {e}")
             return []
-
-        finally:
-            # Cerrar la conexión con la base de datos
-            db.close()
 
 
 
