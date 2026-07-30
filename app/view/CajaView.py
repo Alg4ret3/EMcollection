@@ -256,6 +256,7 @@ class Caja_View(QWidget, Ui_Caja):
                     for value, col_idx in items:
                         item = QtWidgets.QTableWidgetItem(value)
                         item.setTextAlignment(QtCore.Qt.AlignCenter)
+                        item.setForeground(QColor(255, 0, 0))
                         self.TablaIngresos.setItem(0, col_idx, item)
 
         except Exception as e:
