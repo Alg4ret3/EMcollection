@@ -358,7 +358,7 @@ QPushButton:hover {
                      </property>
                      <property name="icon">
                       <iconset>
-                       <normaloff>../../assets/iconos/signo_dinero.png</normaloff>../../assets/iconos/signo_dinero.png</iconset>
+                       <normaloff>../../../assets/iconos/signo_dinero.png</normaloff>../../../assets/iconos/signo_dinero.png</iconset>
                      </property>
                      <property name="iconSize">
                       <size>
@@ -403,7 +403,7 @@ QPushButton:hover {
                      </property>
                      <property name="icon">
                       <iconset>
-                       <normaloff>../../assets/iconos/cerrar.png</normaloff>../../assets/iconos/cerrar.png</iconset>
+                       <normaloff>../../../assets/iconos/cerrar.png</normaloff>../../../assets/iconos/cerrar.png</iconset>
                      </property>
                      <property name="iconSize">
                       <size>
@@ -482,7 +482,7 @@ Nota: ¡Recuerda abrir la caja antes de generar cualquier venta!</string>
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap>../../assets/iconos/buscar.png</pixmap>
+                   <pixmap>../../../assets/iconos/buscar.png</pixmap>
                   </property>
                   <property name="scaledContents">
                    <bool>true</bool>
