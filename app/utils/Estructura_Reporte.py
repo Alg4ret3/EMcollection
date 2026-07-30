@@ -23,8 +23,8 @@ import os
 import tempfile
 
 
-def generar_pdf_caja_ingresos(caja, ingresos):
-    """Genera un PDF estilizado con la información de la caja y los ingresos registrados."""
+def generar_pdf_caja_ingresos(caja, ingresos, egresos=None):
+    """Genera un PDF estilizado con la información de la caja, los ingresos y los egresos registrados."""
     
     try:
         # Obtener la fecha actual para el nombre del archivo
@@ -131,7 +131,42 @@ def generar_pdf_caja_ingresos(caja, ingresos):
         elementos.append(tabla_ingresos)
         elementos.append(Spacer(1, 0.5 * inch))
 
-                # Sumar los montos de efectivo y transferencia, asegurando que no sean None
+        # Tabla de Egresos
+        if egresos:
+            elementos.append(Paragraph("<b>📊 Egresos Registrados:</b>", estilo_negrita))
+
+            datos_egresos = [["ID", "Tipo", "Monto", "Fecha"]]
+
+            for egreso in egresos:
+                datos_egresos.append([
+                    egreso.ID_Egreso,
+                    egreso.Tipo_Egreso,
+                    f"${egreso.Monto_Egreso:,.2f}",
+                    str(egreso.Fecha_Egreso)[:10],
+                ])
+
+            total_egresos = sum(egreso.Monto_Egreso for egreso in egresos)
+            datos_egresos.append(["", "TOTAL", f"${total_egresos:,.2f}", ""])
+
+            tabla_egresos = Table(datos_egresos, colWidths=[50, 100, 100, 100])
+            tabla_egresos.setStyle(TableStyle([
+                ("BACKGROUND", (0, 0), (-1, 0), colors.red),
+                ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
+                ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+                ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+                ("FONTSIZE", (0, 0), (-1, 0), 12),
+                ("BOTTOMPADDING", (0, 0), (-1, 0), 8),
+                ("BACKGROUND", (0, 1), (-1, -1), colors.beige),
+                ("GRID", (0, 0), (-1, -1), 1, colors.black),
+                ("BACKGROUND", (0, -1), (-1, -1), colors.lightgrey),
+                ("FONTNAME", (0, -1), (-1, -1), "Helvetica-Bold"),
+                ("TEXTCOLOR", (0, -1), (-1, -1), colors.black),
+            ]))
+
+            elementos.append(tabla_egresos)
+            elementos.append(Spacer(1, 0.5 * inch))
+
+            # Sumar los montos de efectivo y transferencia, asegurando que no sean None
         total_efectivo = sum(i.monto_efectivo if i.monto_efectivo is not None else 0 for i in ingresos)
         total_transferencia = sum(i.monto_transaccion if i.monto_transaccion is not None else 0 for i in ingresos)
 

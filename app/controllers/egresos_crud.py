@@ -59,6 +59,31 @@ def obtener_egresos(db: Session):
     return egresos
 
 
+def obtener_egresos_fecha(db: Session, FechaInicio: datetime = None, FechaFin: datetime = None):
+    """
+    Obtiene los registros de egresos filtrados por fecha.
+    :param db: Sesión de base de datos.
+    :param FechaInicio: Fecha de inicio del periodo.
+    :param FechaFin: Fecha de fin del periodo.
+    :return: Lista de egresos.
+    """
+    egresos = (
+        db.query(
+            Egresos.ID_Egreso,
+            Egresos.Tipo_Egreso,
+            Egresos.Fecha_Egreso,
+            Egresos.Monto_Egreso,
+        )
+    )
+
+    if FechaFin:
+        egresos = egresos.filter(Egresos.Fecha_Egreso.between(FechaInicio, FechaFin))
+    else:
+        egresos = egresos.filter(Egresos.Fecha_Egreso >= FechaInicio)
+
+    return egresos.all()
+
+
 # Obtener un egreso por ID
 def obtener_egreso_por_id(db: Session, id_egreso: int):
     """

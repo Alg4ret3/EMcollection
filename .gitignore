@@ -11,3 +11,5 @@ build/
 dist/
 
 main.spec
+
+venv/*

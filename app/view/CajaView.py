@@ -92,7 +92,7 @@ class Caja_View(QWidget, Ui_Caja):
         self.id_usuario = id_usuario
 
     def generar_reporte(self):
-        """ Filtra los ingresos según la fecha de la caja seleccionada y envía los datos a la función del PDF. """
+        """ Filtra los ingresos y egresos según la fecha de la caja seleccionada y envía los datos a la función del PDF. """
         db = SessionLocal()
         try:
             if not hasattr(self, 'fecha_inicio') or not hasattr(self, 'fecha_fin'):
@@ -102,10 +102,11 @@ class Caja_View(QWidget, Ui_Caja):
             fecha_inicio = self.fecha_inicio
             fecha_fin = self.fecha_fin
 
-            # Consultar ingresos en el rango de fechas
+            # Consultar ingresos y egresos en el rango de fechas
             ingresos = obtener_ingresos(db, fecha_inicio, fecha_fin)
+            egresos = obtener_egresos_fecha(db, fecha_inicio, fecha_fin)
 
-            if ingresos:
+            if ingresos or egresos:
                 # Crear un objeto caja con los datos de la fila seleccionada
                 caja = Caja(
                     Monto_Base=self.monto_base,
@@ -119,10 +120,10 @@ class Caja_View(QWidget, Ui_Caja):
                 )
 
                 # Enviar los datos a la función de generación de PDF
-                generar_pdf_caja_ingresos(caja, ingresos)
+                generar_pdf_caja_ingresos(caja, ingresos, egresos)
 
             else:
-                QMessageBox.information(self, "Sin resultados", "No se encontraron ingresos en el rango de fechas seleccionado.")
+                QMessageBox.information(self, "Sin resultados", "No se encontraron ingresos ni egresos en el rango de fechas seleccionado.")
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Error al generar el reporte: {e}")
@@ -138,11 +139,12 @@ class Caja_View(QWidget, Ui_Caja):
         ) 
         
     def mostrar_tabla(self):
-        
+         
         self.db = SessionLocal()
         
         try:
             ingresos = None
+            egresos = None
             cajas = obtener_cajas(db=self.db)
             
             for caja in cajas:
@@ -150,16 +152,17 @@ class Caja_View(QWidget, Ui_Caja):
                     fecha_apertura = caja.Fecha_Apertura
                     fecha_cierre = caja.Fecha_Cierre
                     ingresos = obtener_ingresos(db=self.db, FechaInicio=fecha_apertura, FechaFin=fecha_cierre)
+                    egresos = obtener_egresos_fecha(db=self.db, FechaInicio=fecha_apertura, FechaFin=fecha_cierre)
                     
         except Exception as e:
             print(f"Error al obtener datos de la caja: {e}")
             return
         finally:
             self.db.close()
-            
-        self.actualizar_tabla(ingresos, cajas)
+             
+        self.actualizar_tabla(ingresos, cajas, egresos)
         
-    def actualizar_tabla(self, ingresos=None, caja=None):
+    def actualizar_tabla(self, ingresos=None, caja=None, egresos=None):
         
         try: 
                  
@@ -233,23 +236,52 @@ class Caja_View(QWidget, Ui_Caja):
                     
         except Exception as e:
             print(f"Error en Tabla caja: {e}")
+
+        try:
+            if egresos:
+                for row, egreso in enumerate(egresos):
+                    id_egreso = str(egreso.ID_Egreso)
+                    tipo = "Egreso: " + str(egreso.Tipo_Egreso)
+                    efectivo = str(egreso.Monto_Egreso)
+                    trasferencia = "0.0"
+                    self.TablaIngresos.insertRow(0)
+
+                    items = [
+                        (id_egreso, 0),
+                        (tipo, 1),
+                        (efectivo, 2),
+                        (trasferencia, 3),
+                    ]
+
+                    for value, col_idx in items:
+                        item = QtWidgets.QTableWidgetItem(value)
+                        item.setTextAlignment(QtCore.Qt.AlignCenter)
+                        self.TablaIngresos.setItem(0, col_idx, item)
+
+        except Exception as e:
+            print(f"Error en Tabla Egresos: {e}")
             
     def sumar_total(self):
-        
+         
         try:
-            monto = []
+            efectivo_total = 0.0
+            trasferencia_total = 0.0
             for row in range(self.TablaIngresos.rowCount()):  
                 
+                movimiento = self.TablaIngresos.item(row, 1).text()
                 efectivo = self.TablaIngresos.item(row, 2).text()
                 trasferencia = self.TablaIngresos.item(row, 3).text()
-                monto.append((float(efectivo), float(trasferencia)))
-                
-            efectivo = sum(monto[0] for monto in monto)
-            trasferencia = sum(monto[1] for monto in monto)
+
+                if movimiento.startswith("Egreso:"):
+                    efectivo_total -= float(efectivo)
+                    trasferencia_total -= float(trasferencia)
+                else:
+                    efectivo_total += float(efectivo)
+                    trasferencia_total += float(trasferencia)
             
-            self.OutEfectivo.setText(f"{efectivo:,.2f}")
-            self.OutTransferencia.setText(f"{trasferencia:,.2f}")
-            self.OutTotal.setText(f"{efectivo + trasferencia:,.2f}")
+            self.OutEfectivo.setText(f"{efectivo_total:,.2f}")
+            self.OutTransferencia.setText(f"{trasferencia_total:,.2f}")
+            self.OutTotal.setText(f"{efectivo_total + trasferencia_total:,.2f}")
         except Exception as e:
             print(f"Error al sumar total: {e}")
         
