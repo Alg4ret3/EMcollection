@@ -44,6 +44,7 @@ class Caja_View(QWidget, Ui_Caja):
         self.InputBuscador.setPlaceholderText("Buscar por Usuario  o Fecha de Apertura AAAA/MM/DD")
         configurar_validador_numerico(self.InputMontoCaja)
         self.monto_apertura = 0.0
+        self.caja_abierta_activa = False
         self.limpiar_tabla()
     
     def formatear_valor(self, valor):
@@ -54,8 +55,14 @@ class Caja_View(QWidget, Ui_Caja):
         self.InputMontoCaja.clear()
         self.limpiar_tabla()
         self.mostrar_tabla()
-        self.OutApertura_2.setText(self.formatear_valor(self.monto_apertura))
-        self.sumar_total()
+        if self.caja_abierta_activa:
+            self.OutApertura_2.setText(self.formatear_valor(self.monto_apertura))
+            self.sumar_total()
+        else:
+            self.OutApertura_2.setText("")
+            self.OutEfectivo.setText("")
+            self.OutTransferencia.setText("")
+            self.OutTotal.setText("")
         
     def seleccionar_fila(self):
         selected_row = self.TablaCaja.currentRow()
@@ -95,9 +102,15 @@ class Caja_View(QWidget, Ui_Caja):
         self.monto_final = monto_final
         self.estado = estado
         self.id_usuario = id_usuario
-        self.monto_apertura = float(str(monto_base).replace(",", "").replace("$", "").strip()) if str(monto_base).strip() else 0.0
-        self.OutApertura_2.setText(self.formatear_valor(self.monto_apertura))
-        self.sumar_total()
+
+        if estado == "Abierta":
+            self.monto_apertura = float(str(monto_base).replace(",", "").replace("$", "").strip()) if str(monto_base).strip() else 0.0
+            self.caja_abierta_activa = True
+            self.OutApertura_2.setText(self.formatear_valor(self.monto_apertura))
+            self.sumar_total()
+        else:
+            self.caja_abierta_activa = False
+            return
 
     def generar_reporte(self):
         """ Filtra los ingresos y egresos según la fecha de la caja seleccionada y envía los datos a la función del PDF. """
@@ -320,6 +333,7 @@ class Caja_View(QWidget, Ui_Caja):
                 base = float(base)
                 estado = True
                 self.monto_apertura = base
+                self.caja_abierta_activa = True
                 self.OutApertura_2.setText(self.formatear_valor(base))
                 self.OutTotal.setText(self.formatear_valor(base))
                 
@@ -381,11 +395,12 @@ class Caja_View(QWidget, Ui_Caja):
                 finally:
                     self.db.close()
                     
-        self.OutEfectivo.setText("0")
-        self.OutTotal.setText("0")
-        self.OutTransferencia.setText("0")
-        self.OutApertura_2.setText("0")
+        self.OutEfectivo.setText("")
+        self.OutTotal.setText("")
+        self.OutTransferencia.setText("")
+        self.OutApertura_2.setText("")
         self.monto_apertura = 0.0
+        self.caja_abierta_activa = False
         
     def buscar_caja(self):
         buscar = self.InputBuscador.text().strip()
