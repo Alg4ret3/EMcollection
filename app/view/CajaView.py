@@ -43,13 +43,18 @@ class Caja_View(QWidget, Ui_Caja):
         #placeholder
         self.InputBuscador.setPlaceholderText("Buscar por Usuario  o Fecha de Apertura AAAA/MM/DD")
         configurar_validador_numerico(self.InputMontoCaja)
+        self.monto_apertura = 0.0
         self.limpiar_tabla()
     
+    def formatear_valor(self, valor):
+        return f"{float(valor):,.2f}"
+
     def showEvent(self, event):
         super().showEvent(event)
         self.InputMontoCaja.clear()
         self.limpiar_tabla()
         self.mostrar_tabla()
+        self.OutApertura_2.setText(self.formatear_valor(self.monto_apertura))
         self.sumar_total()
         
     def seleccionar_fila(self):
@@ -90,6 +95,9 @@ class Caja_View(QWidget, Ui_Caja):
         self.monto_final = monto_final
         self.estado = estado
         self.id_usuario = id_usuario
+        self.monto_apertura = float(str(monto_base).replace(",", "").replace("$", "").strip()) if str(monto_base).strip() else 0.0
+        self.OutApertura_2.setText(self.formatear_valor(self.monto_apertura))
+        self.sumar_total()
 
     def generar_reporte(self):
         """ Filtra los ingresos y egresos según la fecha de la caja seleccionada y envía los datos a la función del PDF. """
@@ -263,12 +271,12 @@ class Caja_View(QWidget, Ui_Caja):
             print(f"Error en Tabla Egresos: {e}")
             
     def sumar_total(self):
-         
         try:
             efectivo_total = 0.0
             trasferencia_total = 0.0
-            for row in range(self.TablaIngresos.rowCount()):  
-                
+            apertura = float(getattr(self, "monto_apertura", 0.0) or 0.0)
+
+            for row in range(self.TablaIngresos.rowCount()):
                 movimiento = self.TablaIngresos.item(row, 1).text()
                 efectivo = self.TablaIngresos.item(row, 2).text()
                 trasferencia = self.TablaIngresos.item(row, 3).text()
@@ -279,10 +287,12 @@ class Caja_View(QWidget, Ui_Caja):
                 else:
                     efectivo_total += float(efectivo)
                     trasferencia_total += float(trasferencia)
-            
+
+            total = apertura + efectivo_total + trasferencia_total
+
             self.OutEfectivo.setText(f"{efectivo_total:,.2f}")
             self.OutTransferencia.setText(f"{trasferencia_total:,.2f}")
-            self.OutTotal.setText(f"{efectivo_total + trasferencia_total:,.2f}")
+            self.OutTotal.setText(f"{total:,.2f}")
         except Exception as e:
             print(f"Error al sumar total: {e}")
         
@@ -309,6 +319,9 @@ class Caja_View(QWidget, Ui_Caja):
                 id_usuario = self.usuario_actual_id
                 base = float(base)
                 estado = True
+                self.monto_apertura = base
+                self.OutApertura_2.setText(self.formatear_valor(base))
+                self.OutTotal.setText(self.formatear_valor(base))
                 
                 caja = crear_caja(db=self.db, monto_base=base, id_usuario=id_usuario, estado=estado)
                 self.limpiar_tabla()
@@ -368,9 +381,11 @@ class Caja_View(QWidget, Ui_Caja):
                 finally:
                     self.db.close()
                     
-        self.OutEfectivo.setText("0.00")
-        self.OutTotal.setText("0.00")
-        self.OutTransferencia.setText("0.00")
+        self.OutEfectivo.setText("0")
+        self.OutTotal.setText("0")
+        self.OutTransferencia.setText("0")
+        self.OutApertura_2.setText("0")
+        self.monto_apertura = 0.0
         
     def buscar_caja(self):
         buscar = self.InputBuscador.text().strip()
